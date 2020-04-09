@@ -1,14 +1,21 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from "@nestjs/typeorm";
-import { Folder } from "../entities/folder.entity";
-import { Repository } from "typeorm";
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+
+import { Folder } from '../entities/folder.entity';
 
 @Injectable()
 export class FoldersService {
-  constructor(@InjectRepository(Folder) private readonly folderRepository: Repository<Folder>) {
+  constructor(
+    @InjectRepository(Folder)
+    private readonly folderRepository: Repository<Folder>,
+  ) {}
+
+  all(): Promise<Folder[]> {
+    return this.folderRepository.find();
   }
 
-  async all(): Promise<Folder[]>{
-    return this.folderRepository.find();
+  get(folderId: number): Promise<Folder> {
+    return this.folderRepository.findOneOrFail(folderId);
   }
 }
