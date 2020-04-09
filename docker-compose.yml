@@ -1,0 +1,58 @@
+version: "3"
+services:
+  api_gateway:
+    depends_on:
+      - graphs_service
+      - folders_service
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./api_gateway
+    ports:
+      - 3000:3000
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_PASSWORD=postgres
+  graphs_service:
+    depends_on:
+      - postgres
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./graphs
+    environment:
+      - GRAPH_SERVICE_HOST=localhost
+      - GRAPH_SERVICE_PORT=3000
+      - GRAPH_SERVICE_WEB_PORT=3001
+      - FOLDER_SERVICE_HOST=localhost
+      - FOLDER_SERVICE_PORT=4000
+      - FOLDER_SERVICE_WEB_PORT=4001
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_USERNAME=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DATABASE=graphs-folders-microservice/graphs
+    volumes:
+      - /app/node_modules
+      - ./graphs:/app
+  folders_service:
+    depends_on:
+      - postgres
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./folders
+    environment:
+      - GRAPH_SERVICE_HOST=localhost
+      - GRAPH_SERVICE_PORT=3000
+      - GRAPH_SERVICE_WEB_PORT=3001
+      - FOLDER_SERVICE_HOST=localhost
+      - FOLDER_SERVICE_PORT=4000
+      - FOLDER_SERVICE_WEB_PORT=4001
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_USERNAME=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DATABASE=graphs-folders-microservice/folders
+    volumes:
+      - /app/node_modules
+      - ./folders:/app

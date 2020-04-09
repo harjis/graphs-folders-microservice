@@ -1,10 +1,10 @@
 module.exports = {
   type: 'postgres',
-  host: 'localhost', //put 'postgres' here if you want to run in docker-compose
-  port: 5432,
-  username: 'postgres',
-  password: 'postgres',
-  database: 'graphs-folders-microservice/folders',
+  host: process.env.POSTGRES_HOST,
+  port: process.env.POSTGRES_PORT,
+  username: process.env.POSTGRES_USERNAME,
+  password: process.env.POSTGRES_PASSWORD,
+  database: process.env.POSTGRES_DATABASE,
   entities: ['dist/**/*.entity.js'],
   synchronize: true,
   logging: true

@@ -9,5 +9,5 @@ export class Graph {
   name!: string;
 
   @Column()
-  folderId: number;
+  folderId!: number;
 }
