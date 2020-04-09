@@ -1,11 +1,11 @@
-import { Controller, Get } from "@nestjs/common";
-import { FoldersService } from "../services/folders.service";
-import { Folder } from "../entities/folder.entity";
+import { Controller, Get } from '@nestjs/common';
 
-@Controller("folders")
+import { FoldersService } from '../services/folders.service';
+import { Folder } from '../entities/folder.entity';
+
+@Controller('folders')
 export class FoldersController {
-  constructor(private foldersService: FoldersService) {
-  }
+  constructor(private foldersService: FoldersService) {}
 
   @Get()
   async all(): Promise<Folder[]> {
