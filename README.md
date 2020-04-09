@@ -5,10 +5,12 @@
 
 ### Create databases
 `docker exec -it graphs-folders-microservice_postgres_1 createdb -U postgres 'graphs-folders-microservice/folders'`
+
 `docker exec -it graphs-folders-microservice_postgres_1 createdb -U postgres 'graphs-folders-microservice/graphs'`
 
 ### Seed databases
 `docker exec -it graphs-folders-microservice_graphs_service_1 npm run seed`
+
 `docker exec -it graphs-folders-microservice_folders_service_1 npm run seed`
 
 ### Navigate to
