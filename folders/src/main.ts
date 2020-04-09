@@ -11,8 +11,13 @@ async function bootstrap() {
     options: { host: envs.folderServiceHost, port: envs.folderServicePort },
   });
   await app.startAllMicroservicesAsync();
-  app.listen(envs.folderServiceWebPort, () =>
-    console.log('Web-server is listening'),
-  );
+  app.listen(envs.folderServiceWebPort, () => {
+    console.log(
+      `Folders microservice is listening on: ${envs.folderServiceHost}:${envs.folderServicePort}`,
+    );
+    console.log(
+      `Folders web-server is listening on: ${envs.folderServiceWebPort}`,
+    );
+  });
 }
 bootstrap();

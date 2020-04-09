@@ -11,8 +11,13 @@ async function bootstrap() {
     options: { host: envs.graphServiceHost, port: envs.graphServicePort },
   });
   await app.startAllMicroservicesAsync();
-  app.listen(envs.graphServiceWebPort, () =>
-    console.log('Web-server is listening'),
-  );
+  app.listen(envs.graphServiceWebPort, () => {
+    console.log(
+      `Graphs microservice is listening on: ${envs.graphServiceHost}:${envs.graphServicePort}`,
+    );
+    console.log(
+      `Graphs web-server is listening on: ${envs.graphServiceWebPort}`,
+    );
+  });
 }
 bootstrap();
