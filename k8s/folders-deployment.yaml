@@ -39,11 +39,11 @@ spec:
               name: POSTGRES_DATABASE
               value: graphs-folders-microservice/folders
             -
-              name: FOLDERS_SERVICE_HOST
-              value: '0.0.0.0'
-            -
-              name: FOLDERS_SERVICE_PORT
-              value: '5000'
-            -
               name: FOLDERS_SERVICE_WEB_PORT
               value: '5001'
+            -
+              name: NATS_HOST
+              value: nats-cluster-ip-service
+            -
+              name: NATS_PORT
+              value: '4222'

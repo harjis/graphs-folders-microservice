@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
 
 import { GraphService } from '../services/graph.service';
 import { Graph } from '../entities/graph.entity';

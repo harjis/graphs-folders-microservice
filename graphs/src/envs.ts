@@ -5,38 +5,22 @@ if (!process.env.GRAPHS_SERVICE_WEB_PORT) {
   graphServiceWebPort = parseInt(process.env.GRAPHS_SERVICE_WEB_PORT);
 }
 
-let graphServicePort: number;
-if (!process.env.GRAPHS_SERVICE_PORT) {
-  throw new Error('Please define: GRAPHS_SERVICE_PORT');
+let natsHost: string;
+if (!process.env.NATS_HOST) {
+  throw new Error('Please define: NATS_HOST');
 } else {
-  graphServicePort = parseInt(process.env.GRAPHS_SERVICE_PORT);
+  natsHost = process.env.NATS_HOST;
 }
 
-let graphServiceHost: string;
-if (!process.env.GRAPHS_SERVICE_HOST) {
-  throw new Error('Please define: GRAPHS_SERVICE_HOST');
+let natsPort: string;
+if (!process.env.NATS_PORT) {
+  throw new Error('Please define: NATS_PORT');
 } else {
-  graphServiceHost = process.env.GRAPHS_SERVICE_HOST;
-}
-
-let folderServiceHost: string;
-if (!process.env.FOLDERS_SERVICE_HOST) {
-  throw new Error('Please define: FOLDERS_SERVICE_HOST');
-} else {
-  folderServiceHost = process.env.FOLDERS_SERVICE_HOST;
-}
-
-let folderServicePort: number;
-if (!process.env.FOLDERS_SERVICE_PORT) {
-  throw new Error('Please define: FOLDERS_SERVICE_PORT');
-} else {
-  folderServicePort = parseInt(process.env.FOLDERS_SERVICE_PORT);
+  natsPort = process.env.NATS_PORT;
 }
 
 export default {
   graphServiceWebPort,
-  graphServicePort,
-  graphServiceHost,
-  folderServicePort,
-  folderServiceHost,
+  natsHost,
+  natsPort
 };

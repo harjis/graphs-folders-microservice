@@ -1,5 +1,13 @@
 version: "3"
 services:
+  nats_service:
+    container_name: nats
+    entrypoint: '/nats-server -c nats-server.conf -DV'
+    image: nats
+    ports:
+      - '4222:4222'
+      - '6222:6222'
+      - '8222:8222'
   api_gateway:
     depends_on:
       - graphs_service
@@ -17,6 +25,7 @@ services:
   graphs_service:
     depends_on:
       - postgres
+      - nats_service
     build:
       dockerfile: Dockerfile.dev
       context: ./graphs
@@ -37,6 +46,7 @@ services:
   folders_service:
     depends_on:
       - postgres
+      - nats_service
     build:
       dockerfile: Dockerfile.dev
       context: ./folders

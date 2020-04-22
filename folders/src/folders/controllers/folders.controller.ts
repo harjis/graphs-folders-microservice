@@ -1,5 +1,10 @@
 import { Body, Controller, Get, Post, UseFilters } from '@nestjs/common';
-import { MessagePattern } from '@nestjs/microservices';
+import {
+  Ctx,
+  MessagePattern,
+  NatsContext,
+  Payload,
+} from '@nestjs/microservices';
 
 import { FoldersService } from '../services/folders.service';
 import { Folder } from '../entities/folder.entity';
@@ -20,8 +25,8 @@ export class FoldersController {
   }
 
   @UseFilters(new EntityNotFoundException())
-  @MessagePattern({ cmd: 'getFolder' })
-  get(folderId: number): Promise<Folder> {
+  @MessagePattern('getFolder')
+  get(@Payload() folderId: number, @Ctx() ctx: NatsContext) {
     return this.foldersService.get(folderId);
   }
 }
