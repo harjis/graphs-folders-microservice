@@ -30,11 +30,9 @@ services:
       dockerfile: Dockerfile.dev
       context: ./graphs
     environment:
-      - GRAPHS_SERVICE_HOST=0.0.0.0
-      - GRAPHS_SERVICE_PORT=4000
       - GRAPHS_SERVICE_WEB_PORT=4001
-      - FOLDERS_SERVICE_HOST=folders_service
-      - FOLDERS_SERVICE_PORT=5000
+      - NATS_HOST=nats_service
+      - NATS_PORT=4222
       - POSTGRES_HOST=postgres
       - POSTGRES_PORT=5432
       - POSTGRES_USERNAME=postgres
@@ -51,9 +49,9 @@ services:
       dockerfile: Dockerfile.dev
       context: ./folders
     environment:
-      - FOLDERS_SERVICE_HOST=0.0.0.0
-      - FOLDERS_SERVICE_PORT=5000
       - FOLDERS_SERVICE_WEB_PORT=5001
+      - NATS_HOST=nats_service
+      - NATS_PORT=4222
       - POSTGRES_HOST=postgres
       - POSTGRES_PORT=5432
       - POSTGRES_USERNAME=postgres
