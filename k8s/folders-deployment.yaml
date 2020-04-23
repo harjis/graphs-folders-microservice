@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: folders-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: folder-server
+  template:
+    metadata:
+      labels:
+        component: folder-server
+    spec:
+      containers:
+        -
+          name: folders-backend
+          image: d0rka/graphs-folders-microservice_folders
+          ports:
+            -
+              containerPort: 5001
+          env:
+            -
+              name: POSTGRES_HOST
+              value: postgres-cluster-ip-service
+            -
+              name: POSTGRES_PORT
+              value: '5432'
+            -
+              name: POSTGRES_USERNAME
+              value: postgres
+            -
+              name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pgpassword
+                  key: POSTGRES_PASSWORD
+            -
+              name: POSTGRES_DATABASE
+              value: graphs-folders-microservice/folders
+            -
+              name: FOLDERS_SERVICE_HOST
+              value: '0.0.0.0'
+            -
+              name: FOLDERS_SERVICE_PORT
+              value: '5000'
+            -
+              name: FOLDERS_SERVICE_WEB_PORT
+              value: '5001'

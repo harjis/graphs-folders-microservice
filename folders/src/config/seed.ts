@@ -15,5 +15,6 @@ const config: ConnectionOptions = {
 createConnection(config).then(async connection => {
   const folder = new Folder();
   folder.name = 'Folder 1';
-  await connection.getRepository(Folder).save(folder);
+  const savedFolder = await connection.getRepository(Folder).save(folder);
+  console.log('Saved folder: ', savedFolder);
 });

@@ -1,0 +1,24 @@
+apiVersion: skaffold/v2alpha4
+kind: Config
+build:
+  artifacts:
+    -
+      image: d0rka/graphs-folders-microservice_folders
+      context: folders
+      docker:
+        dockerfile: Dockerfile.dev
+      sync:
+        manual:
+          -
+            src: 'src/*'
+            dest: .
+    -
+      image: d0rka/graphs-folders-microservice_graphs
+      context: graphs
+      docker:
+        dockerfile: Dockerfile.dev
+      sync:
+        manual:
+          -
+            src: 'src/*'
+            dest: .

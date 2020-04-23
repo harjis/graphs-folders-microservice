@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: graphs-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: graph-server
+  template:
+    metadata:
+      labels:
+        component: graph-server
+    spec:
+      containers:
+        -
+          name: graphs-backend
+          image: d0rka/graphs-folders-microservice_graphs
+          ports:
+            -
+              containerPort: 4001
+          env:
+            -
+              name: POSTGRES_HOST
+              value: postgres-cluster-ip-service
+            -
+              name: POSTGRES_PORT
+              value: '5432'
+            -
+              name: POSTGRES_USERNAME
+              value: postgres
+            -
+              name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pgpassword
+                  key: POSTGRES_PASSWORD
+            -
+              name: POSTGRES_DATABASE
+              value: graphs-folders-microservice/graphs
+            -
+              name: GRAPHS_SERVICE_HOST
+              value: '0.0.0.0'
+            -
+              name: GRAPHS_SERVICE_PORT
+              value: '4000'
+            -
+              name: GRAPHS_SERVICE_WEB_PORT
+              value: '4001'
+            -
+              name: FOLDERS_SERVICE_HOST
+              value: folders-cluster-ip-service
+            -
+              name: FOLDERS_SERVICE_PORT
+              value: '5000'

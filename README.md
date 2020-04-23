@@ -1,5 +1,6 @@
 # How to start
 
+## Docker-compose
 ### Start services
 `docker-compose up`
 
@@ -17,3 +18,19 @@
 
 localhost:3000/folders
 localhost:3000/graphs
+
+## Skaffold
+`skaffold dev`
+
+### Create databases
+`./kubectl-helpers/create-db.sh`
+
+### Seed databases
+
+`./kubectl-helpers/seed-folders.sh`
+`./kubectl-helpers/seed-graphs.sh`
+
+### Navigate to
+
+<minikube-ip>/folders
+<minikube-ip>/graphs
