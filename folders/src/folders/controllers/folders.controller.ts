@@ -1,4 +1,4 @@
-import { Controller, Get, UseFilters } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseFilters } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 
 import { FoldersService } from '../services/folders.service';
@@ -12,6 +12,11 @@ export class FoldersController {
   @Get()
   all(): Promise<Folder[]> {
     return this.foldersService.all();
+  }
+
+  @Post()
+  create(@Body() folder: Folder) {
+    return this.foldersService.create(folder);
   }
 
   @UseFilters(new EntityNotFoundException())

@@ -15,6 +15,10 @@ export class FoldersService {
     return this.folderRepository.find();
   }
 
+  create(folder: Folder) {
+    return this.folderRepository.save(folder);
+  }
+
   get(folderId: number): Promise<Folder> {
     return this.folderRepository.findOneOrFail(folderId);
   }
