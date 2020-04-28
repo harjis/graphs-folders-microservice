@@ -3,15 +3,15 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { Folder } from '../entities/folder.entity';
-import { ClientProxy } from '@nestjs/microservices';
+import { ClientKafka } from '@nestjs/microservices';
 
 @Injectable()
 export class FoldersService {
   constructor(
     @InjectRepository(Folder)
     private readonly folderRepository: Repository<Folder>,
-    @Inject('NATS_SERVICE')
-    private readonly client: ClientProxy,
+    @Inject('KAFKA_SERVICE')
+    private readonly client: ClientKafka,
   ) {}
 
   all(): Promise<Folder[]> {
@@ -20,7 +20,7 @@ export class FoldersService {
 
   async create(folder: Folder) {
     const savedFolder = await this.folderRepository.save(folder);
-    this.client.emit('folder-created', savedFolder);
+    this.client.emit('folders-topic', savedFolder);
     return savedFolder;
   }
 }

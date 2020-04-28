@@ -12,9 +12,15 @@ import { FoldersService } from './services/folders.service';
     TypeOrmModule.forFeature([Folder]),
     ClientsModule.register([
       {
-        name: 'NATS_SERVICE',
-        transport: Transport.NATS,
-        options: { url: `nats://${envs.natsHost}:${envs.natsPort}` },
+        name: 'KAFKA_SERVICE',
+        transport: Transport.KAFKA,
+        options: {
+          client: {
+            ssl: false,
+            clientId: 'folders',
+            brokers: [envs.kafkaHost],
+          },
+        },
       },
     ]),
   ],
