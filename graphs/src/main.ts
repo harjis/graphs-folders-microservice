@@ -8,10 +8,13 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.connectMicroservice<MicroserviceOptions>({
-    transport: Transport.NATS,
+    transport: Transport.KAFKA,
     options: {
-      queue: 'folders',
-      url: `nats://${envs.natsHost}:${envs.natsPort}`,
+      client: {
+        ssl: false,
+        clientId: 'folders',
+        brokers: [envs.kafkaHost],
+      },
     },
   });
   await app.startAllMicroservicesAsync();
