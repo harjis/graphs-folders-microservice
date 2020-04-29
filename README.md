@@ -61,6 +61,17 @@ Trouble with skaffold: At some point skaffold dev simply did not stabilize the d
 state. I was not able to figure out the exact reason for this but it might be related to missing space. At 
 that time I also started to get a lot of `no space left on device` errors. I pruned everything and skaffold started
 working
-`docker system prune`
+```sh
+docker system prune
+```
 
-`docker volume prune`
+```sh
+docker volume prune
+```
+
+## Kafka
+
+Open kafka consumer (debug purposes)
+```sh
+kubectl -n kafka run kafka-consumer -ti --image=strimzi/kafka:0.17.0-kafka-2.4.0 --rm=true --restart=Never -- bin/kafka-console-consumer.sh --bootstrap-server $(minikube ip):32100 --topic folders-topic --from-beginning
+```
