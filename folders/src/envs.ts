@@ -5,22 +5,14 @@ if (!process.env.FOLDERS_SERVICE_WEB_PORT) {
   folderServiceWebPort = parseInt(process.env.FOLDERS_SERVICE_WEB_PORT);
 }
 
-let folderServiceHost: string;
-if (!process.env.FOLDERS_SERVICE_HOST) {
-  throw new Error('Please define: FOLDERS_SERVICE_HOST');
+let kafkaHost: string;
+if (!process.env.KAFKA_HOST) {
+  throw new Error('Please define: KAFKA_HOST');
 } else {
-  folderServiceHost = process.env.FOLDERS_SERVICE_HOST;
-}
-
-let folderServicePort: number;
-if (!process.env.FOLDERS_SERVICE_PORT) {
-  throw new Error('Please define: FOLDERS_SERVICE_PORT');
-} else {
-  folderServicePort = parseInt(process.env.FOLDERS_SERVICE_PORT);
+  kafkaHost = process.env.KAFKA_HOST;
 }
 
 export default {
   folderServiceWebPort,
-  folderServicePort,
-  folderServiceHost,
+  kafkaHost
 };

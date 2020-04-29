@@ -1,6 +1,7 @@
 import { ConnectionOptions, createConnection } from 'typeorm';
 
 import { Graph } from '../graphs/entities/graph.entity';
+import { Folder } from '../graphs/entities/folder.entity';
 
 const config: ConnectionOptions = {
   type: 'postgres',
@@ -16,7 +17,10 @@ const config: ConnectionOptions = {
 createConnection(config).then(async connection => {
   const graph = new Graph();
   graph.name = 'Graph 1';
-  graph.folderId = 1;
+  // TODO This should not be done. Is this forbidden or do I just fetch them here?
+  const folder = new Folder();
+  folder.name = 'Folder 1';
+  graph.folder = folder;
   const savedGraph = await connection.getRepository(Graph).save(graph);
   console.log('Saved graph: ', savedGraph);
 });

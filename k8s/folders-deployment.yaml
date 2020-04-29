@@ -39,11 +39,8 @@ spec:
               name: POSTGRES_DATABASE
               value: graphs-folders-microservice/folders
             -
-              name: FOLDERS_SERVICE_HOST
-              value: '0.0.0.0'
-            -
-              name: FOLDERS_SERVICE_PORT
-              value: '5000'
-            -
               name: FOLDERS_SERVICE_WEB_PORT
               value: '5001'
+            -
+              name: KAFKA_HOST
+              value: 'my-cluster-kafka-0.my-cluster-kafka-brokers.my-kafka-project.svc:9092'
