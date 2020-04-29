@@ -1,6 +1,6 @@
 # How to start
 
-## Docker-compose
+## Docker-compose (DOESN'T HAVE SUPPORT FOR KAFKA ATM.)
 ### Start services
 `docker-compose up`
 
