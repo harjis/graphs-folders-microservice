@@ -1,0 +1,155 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2020-04-29T08:30:31.467Z",
+  "__export_source": "insomnia.desktop.app:v7.1.1",
+  "resources": [
+    {
+      "_id": "req_cb748dd7967541338336f0b049215107",
+      "authentication": {},
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\": \"Test Graph\",\n\t\"folderId\": 1\n}"
+      },
+      "created": 1587627684043,
+      "description": "",
+      "headers": [
+        {
+          "id": "pair_643dd458943a4ecb82094dcc175df99b",
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "isPrivate": false,
+      "metaSortKey": -1587627684043,
+      "method": "POST",
+      "modified": 1588147042613,
+      "name": "Graphs",
+      "parameters": [],
+      "parentId": "wrk_8a519d18cbf6468cbf5c5a44dd8d7c12",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "http://{{ minikubeIp  }}/graphs/",
+      "_type": "request"
+    },
+    {
+      "_id": "wrk_8a519d18cbf6468cbf5c5a44dd8d7c12",
+      "created": 1587627476881,
+      "description": "",
+      "modified": 1587627476881,
+      "name": "Minikube",
+      "parentId": null,
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_01b84b0ff76f466eaf770372d76656a5",
+      "authentication": {},
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\": \"Test\"\n}"
+      },
+      "created": 1587627511853,
+      "description": "",
+      "headers": [
+        {
+          "id": "pair_a64754da87854a5dbbf8a10ace85d645",
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "isPrivate": false,
+      "metaSortKey": -1587627505172.5,
+      "method": "POST",
+      "modified": 1587718091507,
+      "name": "Folders",
+      "parameters": [],
+      "parentId": "wrk_8a519d18cbf6468cbf5c5a44dd8d7c12",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "http://{{ minikubeIp  }}/folders",
+      "_type": "request"
+    },
+    {
+      "_id": "req_6abb833ccfa6451fb01d28559f373372",
+      "authentication": {},
+      "body": {},
+      "created": 1587627498492,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1587627498492,
+      "method": "GET",
+      "modified": 1587718098580,
+      "name": "Folders",
+      "parameters": [],
+      "parentId": "wrk_8a519d18cbf6468cbf5c5a44dd8d7c12",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "http://{{ minikubeIp  }}/folders",
+      "_type": "request"
+    },
+    {
+      "_id": "req_cc083edb4a9e42a09e3edbcadefc2413",
+      "authentication": {},
+      "body": {},
+      "created": 1587627482321,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1587627482322,
+      "method": "GET",
+      "modified": 1587718104948,
+      "name": "Graphs",
+      "parameters": [],
+      "parentId": "wrk_8a519d18cbf6468cbf5c5a44dd8d7c12",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "http://{{ minikubeIp  }}/graphs/",
+      "_type": "request"
+    },
+    {
+      "_id": "env_d06840d37fec7198c6b96bdd5507e1ad3797c074",
+      "color": null,
+      "created": 1587627476932,
+      "data": {
+        "minikubeIp": "192.168.64.7"
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "minikubeIp"
+        ]
+      },
+      "isPrivate": false,
+      "metaSortKey": 1587627476932,
+      "modified": 1588073019941,
+      "name": "Base Environment",
+      "parentId": "wrk_8a519d18cbf6468cbf5c5a44dd8d7c12",
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_d06840d37fec7198c6b96bdd5507e1ad3797c074",
+      "cookies": [],
+      "created": 1587627476938,
+      "modified": 1587627476938,
+      "name": "Default Jar",
+      "parentId": "wrk_8a519d18cbf6468cbf5c5a44dd8d7c12",
+      "_type": "cookie_jar"
+    }
+  ]
+}
