@@ -20,9 +20,10 @@ localhost:3000/folders
 localhost:3000/graphs
 
 ## Skaffold
-1. Create postgress secret
+1. Create postgress secret and enable ingress on minikube
 ```sh
 kubectl create secret generic pgpassword --from-literal POSTGRES_PASSWORD=my_pgpassword
+minikube addons enable ingress
 ```
 
 3. Start dev
