@@ -20,7 +20,17 @@ localhost:3000/folders
 localhost:3000/graphs
 
 ## Skaffold
-`skaffold dev`
+1. Create postgress secret
+```sh
+kubectl create secret generic pgpassword --from-literal POSTGRES_PASSWORD=my_pgpassword
+```
+
+3. Start dev
+```sh
+skaffold dev
+```
+
+4. Create db's
 
 ### Create databases
 `./kubectl-helpers/create-db.sh`
@@ -30,7 +40,7 @@ localhost:3000/graphs
 `./kubectl-helpers/seed-folders.sh`
 `./kubectl-helpers/seed-graphs.sh`
 
-### Navigate to
+### Navigate to (there is insomnia config also)
 
 <minikube-ip>/folders
 <minikube-ip>/graphs
