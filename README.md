@@ -25,6 +25,11 @@ localhost:3000/graphs
 kubectl create secret generic pgpassword --from-literal POSTGRES_PASSWORD=my_pgpassword
 ```
 
+2. Init kafka. Sometimes this takes quite long (~5min)
+```sh
+./kafka-init.sh
+```
+
 3. Start dev
 ```sh
 skaffold dev
