@@ -74,3 +74,15 @@ working
 Trouble with kafka: If strimzi fails to start it might be that KubernetesClient and Kubernetes versions are not
 compatible. Try starting the minikube with an older version `minikube start --kubernetes-version v1.15.3`
 https://github.com/strimzi/strimzi-kafka-operator/issues/2920
+
+## Kafka
+
+Open kafka producer (debug purposes)
+```shell script
+kubectl -n kafka run kafka-producer -ti --image=strimzi/kafka:0.17.0-kafka-2.4.0 --rm=true --restart=Never -- bin/kafka-console-producer.sh --broker-list $(minikube ip):32100 --topic folders-topic
+```
+
+Open kafka consumer (debug purposes)
+```shell script
+kubectl -n kafka run kafka-consumer -ti --image=strimzi/kafka:0.17.0-kafka-2.4.0 --rm=true --restart=Never -- bin/kafka-console-consumer.sh --bootstrap-server $(minikube ip):32100 --topic folders-topic --from-beginning
+```
