@@ -13,7 +13,9 @@ export class FoldersService {
     private readonly folderRepository: Repository<Folder>,
     @Inject('KAFKA_SERVICE')
     private readonly client: ClientKafka,
-  ) {}
+  ) {
+    this.client.subscribeToResponseOf('folders-topic');
+  }
 
   all(): Promise<Folder[]> {
     return this.folderRepository.find();
@@ -34,11 +36,23 @@ export class FoldersService {
   }
 
   async delete(folderId: number) {
+    // TODO Imo simple thing has become very complex.
     const folder = await this.get(folderId);
-    // I suppose this is part of the OOP pain. If you do this.folderRepository.remove(folder);
-    // here the app works incorrectly. This is because remove mutates folder instance and sets id undefined
-    await this.folderRepository.delete(folderId);
     const event: KafkaMessageType<Folder> = { type: 'DELETE', payload: folder };
-    this.client.emit('folders-topic', event);
+    const promise = this.client.send('folders-topic', event).toPromise();
+    return promise
+      .then(() => {
+        // I suppose this is part of the OOP pain. If you do this.folderRepository.remove(folder);
+        // here the app works incorrectly. This is because remove mutates folder instance and sets id undefined
+        return this.folderRepository.delete(folderId);
+      })
+      .catch(error => {
+        const event: KafkaMessageType<Folder> = {
+          type: 'UPSERT',
+          payload: folder,
+        };
+        this.client.emit('folders-topic', event);
+        throw Error(error);
+      });
   }
 }
