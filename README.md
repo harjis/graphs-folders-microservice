@@ -20,18 +20,24 @@ localhost:3000/folders
 localhost:3000/graphs
 
 ## Skaffold
-1. Create postgress secret
-```sh
+1. Create postgress secret and enable ingress
+```shell script
 kubectl create secret generic pgpassword --from-literal POSTGRES_PASSWORD=my_pgpassword
+minikube addons enable ingress
+```
+
+1.5: Apply persistent volume claim. This is done separately so that skaffold dev doesn't clean up db on restarts
+```shell script
+kubectl apply -f k8s-pvc
 ```
 
 2. Init kafka. Sometimes this takes quite long (~5min)
-```sh
+```shell script
 ./kafka-init.sh
 ```
 
 3. Start dev
-```sh
+```shell script
 skaffold dev
 ```
 
