@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
+} from '@nestjs/common';
 
 import { FoldersService } from '../services/folders.service';
 import { Folder } from '../entities/folder.entity';
@@ -14,6 +23,16 @@ export class FoldersController {
 
   @Post()
   create(@Body() folder: Folder) {
-    return this.foldersService.create(folder);
+    return this.foldersService.upsert(folder);
+  }
+
+  @Put()
+  update(@Body() folder: Folder) {
+    return this.foldersService.upsert(folder);
+  }
+
+  @Delete(':folderId')
+  delete(@Param('folderId', new ParseIntPipe()) folderId: number) {
+    return this.foldersService.delete(folderId);
   }
 }

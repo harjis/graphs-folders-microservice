@@ -11,7 +11,11 @@ export class FolderService {
     private readonly folderRepository: Repository<Folder>,
   ) {}
 
-  create(folder: Folder) {
+  upsert(folder: Folder) {
     return this.folderRepository.save(folder);
+  }
+
+  delete(folder: Folder) {
+    return this.folderRepository.remove(folder);
   }
 }
