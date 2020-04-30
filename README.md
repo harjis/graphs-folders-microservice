@@ -64,3 +64,7 @@ working
 `docker system prune`
 
 `docker volume prune`
+
+Trouble with kafka: If strimzi fails to start it might be that KubernetesClient and Kubernetes versions are not
+compatible. Try starting the minikube with an older version `minikube start --kubernetes-version v1.15.3`
+https://github.com/strimzi/strimzi-kafka-operator/issues/2920
