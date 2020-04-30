@@ -17,9 +17,11 @@ import { FoldersService } from './services/folders.service';
         options: {
           client: {
             ssl: false,
-            clientId: 'folders',
             brokers: [envs.kafkaHost],
           },
+          consumer: {
+            groupId: 'folders-service'
+          }
         },
       },
     ]),
