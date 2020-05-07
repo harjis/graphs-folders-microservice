@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: outputs-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: output-server
+  template:
+    metadata:
+      labels:
+        component: output-server
+    spec:
+      containers:
+        -
+          name: outputs-backend
+          image: d0rka/graphs-folders-microservice_outputs
+          ports:
+            -
+              containerPort: 6001
+          env:
+            -
+              name: POSTGRES_HOST
+              value: postgres-cluster-ip-service
+            -
+              name: POSTGRES_PORT
+              value: '5432'
+            -
+              name: POSTGRES_USERNAME
+              value: postgres
+            -
+              name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pgpassword
+                  key: POSTGRES_PASSWORD
+            -
+              name: POSTGRES_DATABASE
+              value: graphs-folders-microservice/outputs
+            -
+              name: OUTPUTS_SERVICE_WEB_PORT
+              value: '6001'
+            -
+              name: KAFKA_HOST
+              value: 'my-cluster-kafka-0.my-cluster-kafka-brokers.my-kafka-project.svc:9092'
