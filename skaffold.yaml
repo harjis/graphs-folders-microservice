@@ -22,3 +22,8 @@ build:
           -
             src: 'src/*'
             dest: .
+    -
+      image: d0rka/graphs-folders-microservice_outputs
+      context: outputs
+      docker:
+        dockerfile: Dockerfile.dev
