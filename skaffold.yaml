@@ -1,4 +1,4 @@
-apiVersion: skaffold/v2alpha4
+apiVersion: skaffold/v2beta3
 kind: Config
 build:
   artifacts:
@@ -24,6 +24,6 @@ build:
             dest: .
     -
       image: d0rka/graphs-folders-microservice_outputs
+      jib: {}
       context: outputs
-      docker:
-        dockerfile: Dockerfile.dev
+      # Jib has problems with Dockerfile.dev so that's why it is just Dockerfile

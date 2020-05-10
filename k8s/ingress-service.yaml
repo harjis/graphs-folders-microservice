@@ -19,3 +19,8 @@ spec:
             backend:
               serviceName: folders-cluster-ip-service
               servicePort: 5001
+          -
+            path: /outputs
+            backend:
+              serviceName: outputs-cluster-ip-service
+              servicePort: 6001
