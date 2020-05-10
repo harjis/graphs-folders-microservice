@@ -20,7 +20,7 @@ spec:
               serviceName: folders-cluster-ip-service
               servicePort: 5001
           -
-            path: /outputs
+            path: /jobs
             backend:
-              serviceName: outputs-cluster-ip-service
+              serviceName: jobs-cluster-ip-service
               servicePort: 6001

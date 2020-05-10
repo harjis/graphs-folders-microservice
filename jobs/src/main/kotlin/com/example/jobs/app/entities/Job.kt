@@ -1,10 +1,10 @@
-package com.example.outputs.app.entities
+package com.example.jobs.app.entities
 
 import java.util.*
 import javax.persistence.Entity
 
 @Entity
-class Output(
+class Job(
         var name: String,
         id: UUID = UUID.randomUUID()
 ) : AbstractJpaPersistable<UUID>(id) {}

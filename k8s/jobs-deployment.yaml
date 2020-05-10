@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: outputs-deployment
+  name: jobs-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      component: output-server
+      component: job-server
   template:
     metadata:
       labels:
-        component: output-server
+        component: job-server
     spec:
       containers:
         -
-          name: outputs-backend
-          image: d0rka/graphs-folders-microservice_outputs
+          name: jobs-backend
+          image: d0rka/graphs-folders-microservice_jobs
           ports:
             -
               containerPort: 6001
@@ -37,9 +37,9 @@ spec:
                   key: POSTGRES_PASSWORD
             -
               name: POSTGRES_DATABASE
-              value: graphs-folders-microservice/outputs
+              value: graphs-folders-microservice/jobs
             -
-              name: OUTPUTS_SERVICE_WEB_PORT
+              name: JOBS_SERVICE_WEB_PORT
               value: '6001'
             -
               name: KAFKA_HOST

@@ -23,7 +23,7 @@ build:
             src: 'src/*'
             dest: .
     -
-      image: d0rka/graphs-folders-microservice_outputs
+      image: d0rka/graphs-folders-microservice_jobs
       jib: {}
-      context: outputs
+      context: jobs
       # Jib has problems with Dockerfile.dev so that's why it is just Dockerfile

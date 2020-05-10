@@ -1,4 +1,4 @@
-package com.example.outputs.app.entities
+package com.example.jobs.app.entities
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import org.springframework.data.domain.Persistable
