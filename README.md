@@ -31,9 +31,10 @@ minikube addons enable ingress
 kubectl apply -f k8s-pvc
 ```
 
-2. Init kafka. Sometimes this takes quite long (~5min)
+2. Init kafka. Sometimes this takes quite long (~5min) and create topics
 ```shell script
-./kafka-init.sh
+helm install my-kafka confluent/cp-helm-charts
+./kafka-create-topics.sh
 ```
 
 3. Start dev

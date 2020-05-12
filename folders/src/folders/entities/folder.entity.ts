@@ -1,10 +1,21 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn, UpdateDateColumn,
+} from 'typeorm';
 
-@Entity("folders")
+@Entity('folders')
 export class Folder {
   @PrimaryGeneratedColumn()
-  id!:number;
+  id!: number;
 
   @Column()
   name!: string;
+
+  @CreateDateColumn({ type: 'timestamp' })
+  createdAt!: Date;
+
+  @UpdateDateColumn({type: 'timestamp'})
+  updatedAt!: Date;
 }

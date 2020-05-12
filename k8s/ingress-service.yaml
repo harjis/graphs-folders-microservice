@@ -24,3 +24,8 @@ spec:
             backend:
               serviceName: jobs-cluster-ip-service
               servicePort: 6001
+          -
+            path: /
+            backend:
+              serviceName: my-kafka-cp-control-center
+              servicePort: 9021

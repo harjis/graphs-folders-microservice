@@ -43,4 +43,4 @@ spec:
               value: '5001'
             -
               name: KAFKA_HOST
-              value: 'my-cluster-kafka-0.my-cluster-kafka-brokers.my-kafka-project.svc:9092'
+              value: 'my-kafka-cp-kafka-headless:9092'
