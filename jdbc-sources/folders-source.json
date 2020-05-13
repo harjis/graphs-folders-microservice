@@ -1,5 +1,5 @@
 {
-  "name": "folders-test",
+  "name": "folders-source",
   "config": {
     "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
     "transforms": "createKey, extractInt",
@@ -15,6 +15,6 @@
     "incrementing.column.name": "id",
     "timestamp.column.name": "createdAt",
     "validate.non.null": "true",
-    "topic.prefix": "folders-test"
+    "topic.prefix": "f_"
   }
 }
