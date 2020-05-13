@@ -72,5 +72,8 @@
     },
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "resolutions": {
+    "tslib": "1.11.2"
   }
 }
