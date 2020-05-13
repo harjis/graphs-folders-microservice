@@ -7,7 +7,7 @@
     "transforms.createKey.fields": "id",
     "transforms.extractInt.type": "org.apache.kafka.connect.transforms.ExtractField$Key",
     "transforms.extractInt.field": "id",
-    "connection.url": "jdbc:postgresql://10.100.89.148:5432/graphs-folders-microservice/folders",
+    "connection.url": "jdbc:postgresql://postgres-cluster-ip-service:5432/graphs-folders-microservice/folders",
     "connection.user": "postgres",
     "connection.password": "my_pgpassword",
     "table.whitelist": "folders",

@@ -3,7 +3,7 @@
   "config": {
     "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
     "topics": "f_folders",
-    "connection.url": "jdbc:postgresql://10.100.89.148:5432/graphs-folders-microservice/jobs",
+    "connection.url": "jdbc:postgresql://postgres-cluster-ip-service:5432/graphs-folders-microservice/jobs",
     "connection.user": "postgres",
     "connection.password": "my_pgpassword",
     "dialect.name": "PostgreSqlDatabaseDialect",

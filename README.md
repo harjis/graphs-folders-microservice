@@ -28,13 +28,12 @@ minikube addons enable ingress
 
 1.5: Apply persistent volume claim. This is done separately so that skaffold dev doesn't clean up db on restarts
 ```shell script
-kubectl apply -f k8s-pvc
+./pvc-apply.sh
 ```
 
 2. Init kafka. Sometimes this takes quite long (~5min) and create topics
 ```shell script
 helm install my-kafka confluent/cp-helm-charts
-./kafka-create-topics.sh
 ```
 
 3. Start dev
