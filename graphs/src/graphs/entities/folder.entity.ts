@@ -1,13 +1,26 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { Graph } from './graph.entity';
 
-@Entity('folders')
+@Entity('f_folders')
 export class Folder {
   @PrimaryGeneratedColumn()
   id!: number;
 
   @Column()
   name!: string;
+
+  @CreateDateColumn({ type: 'timestamp' })
+  createdAt!: Date;
+
+  @UpdateDateColumn({ type: 'timestamp' })
+  updatedAt!: Date;
 
   @OneToMany(
     type => Graph,
