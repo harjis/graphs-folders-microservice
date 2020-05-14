@@ -1,4 +1,4 @@
-{
+kubectl exec -it kafka-client -- curl -X POST http://my-kafka-cp-kafka-connect:8083/connectors -H "Content-Type: application/json" -d '{
   "name": "folders-source",
   "config": {
     "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
@@ -18,3 +18,4 @@
     "topic.prefix": "f_"
   }
 }
+'
