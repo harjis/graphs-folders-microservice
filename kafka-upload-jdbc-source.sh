@@ -13,7 +13,7 @@ kubectl exec -it kafka-client -- curl -X POST http://my-kafka-cp-kafka-connect:8
     "table.whitelist": "folders",
     "mode": "timestamp+incrementing",
     "incrementing.column.name": "id",
-    "timestamp.column.name": "createdAt",
+    "timestamp.column.name": "updatedAt",
     "validate.non.null": "true",
     "topic.prefix": "f_"
   }
