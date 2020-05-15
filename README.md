@@ -37,11 +37,6 @@ skaffold dev
 ./kafka-upload-folders-sink-jobs.sh
 ```
 
-### Seed databases
-
-`./kubectl-helpers/seed-folders.sh`
-`./kubectl-helpers/seed-graphs.sh`
-
 ### Navigate to (there is insomnia config also)
 
 <minikube-ip>/folders
