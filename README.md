@@ -1,24 +1,5 @@
 # How to start
 
-## Docker-compose (DOESN'T HAVE SUPPORT FOR KAFKA ATM.)
-### Start services
-`docker-compose up`
-
-### Create databases
-`docker exec -it graphs-folders-microservice_postgres_1 createdb -U postgres 'graphs-folders-microservice/folders'`
-
-`docker exec -it graphs-folders-microservice_postgres_1 createdb -U postgres 'graphs-folders-microservice/graphs'`
-
-### Seed databases
-`docker exec -it graphs-folders-microservice_graphs_service_1 npm run seed`
-
-`docker exec -it graphs-folders-microservice_folders_service_1 npm run seed`
-
-### Navigate to
-
-localhost:3000/folders
-localhost:3000/graphs
-
 ## Skaffold
 1. Create postgress secret and enable ingress
 ```shell script
@@ -31,7 +12,7 @@ minikube addons enable ingress
 ./pvc-apply.sh
 ```
 
-2. Init kafka. Sometimes this takes quite long (~5min) and create topics
+2. Init kafka. Sometimes this takes quite long (~5min)
 ```shell script
 helm install my-kafka confluent/cp-helm-charts
 ```
@@ -44,7 +25,17 @@ skaffold dev
 4. Create db's
 
 ### Create databases
-`./kubectl-helpers/create-db.sh`
+```shell script
+./kubectl-helpers/create-db.sh
+```
+
+5. Upload sources and sinks
+```shell script
+./kafka-upload-folders-source.sh
+./kafka-upload-graphs-source.sh
+./kafka-upload-folders-sink-graphs.sh
+./kafka-upload-folders-sink-jobs.sh
+```
 
 ### Seed databases
 
@@ -77,12 +68,14 @@ https://github.com/strimzi/strimzi-kafka-operator/issues/2920
 
 ## Kafka
 
-Open kafka producer (debug purposes)
+List topics:
 ```shell script
-kubectl -n kafka run kafka-producer -ti --image=strimzi/kafka:0.17.0-kafka-2.4.0 --rm=true --restart=Never -- bin/kafka-console-producer.sh --broker-list $(minikube ip):32100 --topic folders-topic
+./kafka-ssh.sh
+kafka-topics --zookeeper my-kafka-cp-zookeeper-headless:2181 --list
 ```
 
-Open kafka consumer (debug purposes)
+Delete topic:
 ```shell script
-kubectl -n kafka run kafka-consumer -ti --image=strimzi/kafka:0.17.0-kafka-2.4.0 --rm=true --restart=Never -- bin/kafka-console-consumer.sh --bootstrap-server $(minikube ip):32100 --topic folders-topic --from-beginning
+./kafka-ssh.sh
+kafka-topics --zookeeper my-kafka-cp-zookeeper-headless:2181 --delete --topic t_folders
 ```

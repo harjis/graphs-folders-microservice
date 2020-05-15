@@ -2,7 +2,7 @@ kubectl exec -it kafka-client -- curl -X POST http://my-kafka-cp-kafka-connect:8
   "name": "sink-folders-jobs",
   "config": {
     "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
-    "topics": "f_folders",
+    "topics": "t_folders",
     "connection.url": "jdbc:postgresql://postgres-cluster-ip-service:5432/graphs-folders-microservice/jobs",
     "connection.user": "postgres",
     "connection.password": "my_pgpassword",

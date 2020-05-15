@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 import { Graph } from './graph.entity';
 
-@Entity('f_folders')
+@Entity('t_folders')
 export class Folder {
   @PrimaryGeneratedColumn()
   id!: number;
