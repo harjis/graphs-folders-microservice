@@ -21,6 +21,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "migrations:create": "typeorm migration:create -n",
     "migrations:run": "typeorm migration:run",
+    "migrations:rollback": "typeorm migration:revert",
     "seed": "ts-node src/config/seed.ts -e ts",
     "ts": "tsc --pretty"
   },
