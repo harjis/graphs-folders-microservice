@@ -9,7 +9,7 @@ minikube addons enable ingress
 
 1.5: Apply persistent volume claim. This is done separately so that skaffold dev doesn't clean up db on restarts
 ```shell script
-./pvc-apply.sh
+./db-helpers/pvc-apply.sh
 ```
 
 2. Init kafka. Sometimes this takes quite long (~5min)
@@ -26,15 +26,15 @@ skaffold dev
 
 ### Create databases
 ```shell script
-./kubectl-helpers/create-db.sh
+./db-helpers/create-db.sh
 ```
 
 5. Upload sources and sinks
 ```shell script
-./kafka-upload-folders-source.sh
-./kafka-upload-graphs-source.sh
-./kafka-upload-folders-sink-graphs.sh
-./kafka-upload-folders-sink-jobs.sh
+./kafka-helpers/upload-folders-source.sh
+./kafka-helpers/upload-graphs-source.sh
+./kafka-helpers/upload-folders-sink-graphs.sh
+./kafka-helpers/upload-folders-sink-jobs.sh
 ```
 
 ### Navigate to (there is insomnia config also)
@@ -65,12 +65,12 @@ https://github.com/strimzi/strimzi-kafka-operator/issues/2920
 
 List topics:
 ```shell script
-./kafka-ssh.sh
+./kafka-helpers/ssh.sh
 kafka-topics --zookeeper my-kafka-cp-zookeeper-headless:2181 --list
 ```
 
 Delete topic:
 ```shell script
-./kafka-ssh.sh
+./kafka-helpers/ssh.sh
 kafka-topics --zookeeper my-kafka-cp-zookeeper-headless:2181 --delete --topic t_folders
 ```

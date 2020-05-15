@@ -12,7 +12,7 @@ kubectl exec -it kafka-client -- curl -X POST http://my-kafka-cp-kafka-connect:8
     "pk.mode": "record_key",
     "pk.fields": "id",
     "auto.create": "false",
-    "auto.evolve": "false"
+    "auto.evolve": "true"
   }
 }
 '
