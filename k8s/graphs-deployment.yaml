@@ -41,6 +41,3 @@ spec:
             -
               name: GRAPHS_SERVICE_WEB_PORT
               value: '4001'
-            -
-              name: KAFKA_HOST
-              value: 'my-kafka-cp-kafka-headless:9092'

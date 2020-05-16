@@ -41,6 +41,3 @@ spec:
             -
               name: FOLDERS_SERVICE_WEB_PORT
               value: '5001'
-            -
-              name: KAFKA_HOST
-              value: 'my-kafka-cp-kafka-headless:9092'
