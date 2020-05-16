@@ -27,3 +27,8 @@ build:
       jib: {}
       context: jobs
       # Jib has problems with Dockerfile.dev so that's why it is just Dockerfile
+    -
+      image: d0rka/graphs-folders-microservice_graphs-folders-analytics
+      jib: {}
+      context: graphs-folders-analytics
+      # Jib has problems with Dockerfile.dev so that's why it is just Dockerfile

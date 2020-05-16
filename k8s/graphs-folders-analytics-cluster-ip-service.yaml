@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: graphs-folders-analytics-cluster-ip-service
+spec:
+  type: ClusterIP
+  selector:
+    component: graphs-folders-analytics-server
+  ports:
+    -
+      name: web-server
+      port: 7001
+      targetPort: 7001
