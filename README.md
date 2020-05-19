@@ -22,11 +22,10 @@ helm install my-kafka confluent/cp-helm-charts -f k8s-kafka/values.yaml
 skaffold dev
 ```
 
-4. Create db's
-
-### Create databases
+4. Create db's and migrate
 ```shell script
 ./db-helpers/create-db.sh
+./db-helpers/migrate.sh
 ```
 
 5. Upload sources and sinks
