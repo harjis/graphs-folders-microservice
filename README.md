@@ -14,7 +14,7 @@ minikube addons enable ingress
 
 2. Init kafka. Sometimes this takes quite long (~5min)
 ```shell script
-helm install my-kafka confluent/cp-helm-charts
+helm install my-kafka confluent/cp-helm-charts -f k8s-kafka/values.yaml
 ```
 
 3. Start dev
