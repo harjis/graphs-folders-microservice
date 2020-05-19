@@ -3,13 +3,44 @@
  */
 package folder.notifications
 
+import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig
+import io.confluent.kafka.serializers.KafkaAvroDeserializer
+import org.apache.kafka.clients.consumer.ConsumerConfig
+import org.apache.kafka.clients.consumer.KafkaConsumer
+import org.apache.kafka.common.serialization.StringDeserializer
+import java.time.Duration
+import java.util.*
+
 class App {
-    val greeting: String
-        get() {
-            return "Hello world."
+    fun processFolders() {
+        try {
+            val consumer: KafkaConsumer<String, Folder> = KafkaConsumer(getProperties())
+            consumer.subscribe(Collections.singletonList("FOLDERS"))
+
+            while (true) {
+                val records = consumer.poll(Duration.ofMillis(100))
+                records.forEach { record ->
+                    println(record.value())
+                }
+            }
+        } finally {
+            println("Finally do nothing")
         }
+    }
+
+    private fun getProperties(): Properties {
+        val properties = Properties()
+        properties[ConsumerConfig.GROUP_ID_CONFIG] = "folder-notifications-client"
+        properties[ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG] = System.getenv("KAFKA_HOST")
+        properties[ConsumerConfig.AUTO_OFFSET_RESET_CONFIG] = "earliest"
+        properties[AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG] = "http://my-kafka-cp-schema-registry:8081"
+        properties[ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG] = StringDeserializer::class.java
+        properties[ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG] = KafkaAvroDeserializer::class.java
+
+        return properties
+    }
 }
 
 fun main(args: Array<String>) {
-    println(App().greeting)
+    println(App().processFolders())
 }

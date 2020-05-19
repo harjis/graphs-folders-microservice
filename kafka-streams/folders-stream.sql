@@ -5,8 +5,6 @@ CREATE STREAM folders WITH (
 
 CREATE TABLE folders_by_id AS
     SELECT id,
-           latest_by_offset(name) AS name,
-           count(*) as count
+           name
     FROM folders
-    GROUP BY id
     EMIT CHANGES;
