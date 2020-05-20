@@ -14,8 +14,8 @@ minikube addons enable ingress
 
 1.6. Build custom debezium connect JDBC image
 ```shell script
-docker build -t d0rka/debezium-connect-jdbc ./debezium-jdbc
-docker push d0rka/debezium-connect-jdbc
+docker build -t d0rka/debezium-connect-jdbc:1.1 ./debezium-jdbc
+docker push d0rka/debezium-connect-jdbc:1.1
 ```
 
 2. Init kafka. Sometimes this takes quite long (~5min)
