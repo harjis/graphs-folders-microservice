@@ -110,8 +110,8 @@ cp-kafka-rest:
 ## ------------------------------------------------------
 cp-kafka-connect:
   enabled: true
-  image: confluentinc/cp-kafka-connect
-  imageTag: 5.5.0
+  image: d0rka/debezium-connect-jdbc
+  imageTag: latest
   ## Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace.
   ## https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod
   imagePullSecrets:
@@ -126,6 +126,11 @@ cp-kafka-connect:
   #  requests:
   #   cpu: 100m
   #   memory: 128Mi
+  customEnv:
+    CONNECT_PLUGIN_PATH: /usr/share/java,/usr/share/confluent-hub-components,/kafka/connect,/kafka/libs
+    CONFIG_STORAGE_TOPIC: my_connect_configs
+    OFFSET_STORAGE_TOPIC: my_connect_offsets
+    STATUS_STORAGE_TOPIC: my_source_connect_statuses
 
 ## ------------------------------------------------------
 ## KSQL Server

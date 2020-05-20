@@ -2,17 +2,17 @@ kubectl exec -it kafka-client -- curl -X POST http://my-kafka-cp-kafka-connect:8
   "name": "sink-folders-graphs",
   "config": {
     "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
-    "topics": "t_folders",
-    "connection.url": "jdbc:postgresql://postgres-cluster-ip-service:5432/graphs-folders-microservice/graphs",
-    "connection.user": "postgres",
-    "connection.password": "my_pgpassword",
-    "dialect.name": "PostgreSqlDatabaseDialect",
+    "tasks.max": "1",
+    "topics": "folders",
+    "connection.url": "jdbc:postgresql://postgres-cluster-ip-service:5432/graphs-folders-microservice/graphs?user=postgres&password=my_pgpassword",
+    "transforms": "unwrap",
+    "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+    "transforms.unwrap.drop.tombstones": "false",
+    "auto.create": "true",
     "insert.mode": "upsert",
     "delete.enabled": "true",
-    "pk.mode": "record_key",
     "pk.fields": "id",
-    "auto.create": "false",
-    "auto.evolve": "true"
+    "pk.mode": "record_key"
   }
 }
 '

@@ -7,14 +7,24 @@ kubectl create secret generic pgpassword --from-literal POSTGRES_PASSWORD=my_pgp
 minikube addons enable ingress
 ```
 
-1.5: Apply persistent volume claim. This is done separately so that skaffold dev doesn't clean up db on restarts
+1.5. Apply persistent volume claim. This is done separately so that skaffold dev doesn't clean up db on restarts
 ```shell script
 ./db-helpers/pvc-apply.sh
+```
+
+1.6. Build custom debezium connect JDBC image
+```shell script
+docker build -t d0rka/debezium-connect-jdbc ./debezium-jdbc
+docker push d0rka/debezium-connect-jdbc
 ```
 
 2. Init kafka. Sometimes this takes quite long (~5min)
 ```shell script
 helm install my-kafka confluent/cp-helm-charts -f k8s-kafka/values.yaml
+```
+Can be uninstalled with
+```shell script
+helm uninstall my-kafka
 ```
 
 3. Start dev
@@ -28,12 +38,15 @@ skaffold dev
 ./db-helpers/migrate.sh
 ```
 
+4.5. Start kafka-client
+```shell script
+kubectl apply -f k8s-kafka/kafka-client.yaml
+```
+
 5. Upload sources and sinks
 ```shell script
 ./kafka-helpers/upload-folders-source.sh
-./kafka-helpers/upload-graphs-source.sh
 ./kafka-helpers/upload-folders-sink-graphs.sh
-./kafka-helpers/upload-folders-sink-jobs.sh
 ```
 
 ### Navigate to (there is insomnia config also)

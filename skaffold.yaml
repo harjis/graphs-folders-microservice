@@ -22,8 +22,3 @@ build:
           -
             src: 'src/*'
             dest: .
-    -
-      image: d0rka/graphs-folders-microservice_folder-notifications
-      jib: {}
-      context: folder-notifications
-      # Jib has problems with Dockerfile.dev so that's why it is just Dockerfile
