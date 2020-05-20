@@ -55,5 +55,7 @@ export class CreateGraphs1589612479496 implements MigrationInterface {
     );
   }
 
-  public async down(queryRunner: QueryRunner): Promise<any> {}
+  public async down(queryRunner: QueryRunner): Promise<any> {
+    await queryRunner.dropTable('folders');
+  }
 }
