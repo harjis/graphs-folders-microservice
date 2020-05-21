@@ -131,6 +131,8 @@ cp-kafka-connect:
     CONFIG_STORAGE_TOPIC: my_connect_configs
     OFFSET_STORAGE_TOPIC: my_connect_offsets
     STATUS_STORAGE_TOPIC: my_source_connect_statuses
+    CONNECT_KEY_CONVERTER_SCHEMAS_ENABLE: true
+    CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE: true
 
 ## ------------------------------------------------------
 ## KSQL Server

@@ -10,7 +10,7 @@ kubectl exec -it kafka-client -- curl -X POST http://my-kafka-cp-kafka-connect:8
     "database.dbname": "graphs-folders-microservice/folders",
     "database.server.name": "folders",
     "database.whitelist": "folders",
-    "database.history.kafka.bootstrap.servers": "broker:9092",
+    "database.history.kafka.bootstrap.servers": "my-kafka-cp-kafka-headless:9092",
     "database.history.kafka.topic": "schema-changes.customers",
     "transforms": "route",
     "transforms.route.type": "org.apache.kafka.connect.transforms.RegexRouter",
