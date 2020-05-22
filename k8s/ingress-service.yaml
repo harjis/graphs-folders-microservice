@@ -20,16 +20,6 @@ spec:
               serviceName: folders-cluster-ip-service
               servicePort: 5001
           -
-            path: /jobs
-            backend:
-              serviceName: jobs-cluster-ip-service
-              servicePort: 6001
-          -
-            path: /analytics
-            backend:
-              serviceName: graphs-folders-analytics-cluster-ip-service
-              servicePort: 7001
-          -
             path: /
             backend:
               serviceName: my-kafka-cp-control-center
