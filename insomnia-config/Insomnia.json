@@ -1,9 +1,48 @@
 {
   "_type": "export",
   "__export_format": 4,
-  "__export_date": "2020-05-22T08:16:34.766Z",
+  "__export_date": "2020-05-22T13:30:35.616Z",
   "__export_source": "insomnia.desktop.app:v7.1.1",
   "resources": [
+    {
+      "_id": "req_85b2293928ca4c6e8ff2d16c33139893",
+      "authentication": {},
+      "body": {},
+      "created": 1590154145820,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1590154145820,
+      "method": "GET",
+      "modified": 1590154207541,
+      "name": "Search folders",
+      "parameters": [
+        {
+          "description": "",
+          "id": "pair_3299a0b4c8294e83bcbe375e27bb7f56",
+          "name": "q",
+          "value": "name:Test*"
+        }
+      ],
+      "parentId": "wrk_8a519d18cbf6468cbf5c5a44dd8d7c12",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "http://{{ minikubeIp  }}/search/folders/_search",
+      "_type": "request"
+    },
+    {
+      "_id": "wrk_8a519d18cbf6468cbf5c5a44dd8d7c12",
+      "created": 1587627476881,
+      "description": "",
+      "modified": 1587627476881,
+      "name": "Minikube",
+      "parentId": null,
+      "_type": "workspace"
+    },
     {
       "_id": "req_ae8b7704e3674836ae7a57e3beb8a5b4",
       "authentication": {},
@@ -26,15 +65,6 @@
       "settingStoreCookies": true,
       "url": "http://{{ minikubeIp  }}/folders/1",
       "_type": "request"
-    },
-    {
-      "_id": "wrk_8a519d18cbf6468cbf5c5a44dd8d7c12",
-      "created": 1587627476881,
-      "description": "",
-      "modified": 1587627476881,
-      "name": "Minikube",
-      "parentId": null,
-      "_type": "workspace"
     },
     {
       "_id": "req_57fd25bdc2ff4d19a41cbce8c4c84e52",
@@ -105,7 +135,7 @@
       "authentication": {},
       "body": {
         "mimeType": "application/json",
-        "text": "{\n\t\"name\": \"Test100\"\n}"
+        "text": "{\n\t\"name\": \"Test\"\n}"
       },
       "created": 1587627511853,
       "description": "",
@@ -119,7 +149,7 @@
       "isPrivate": false,
       "metaSortKey": -1587627505172.5,
       "method": "POST",
-      "modified": 1589906406943,
+      "modified": 1590154217128,
       "name": "Folders",
       "parameters": [],
       "parentId": "wrk_8a519d18cbf6468cbf5c5a44dd8d7c12",
@@ -183,7 +213,7 @@
       "color": null,
       "created": 1587627476932,
       "data": {
-        "minikubeIp": "192.168.64.43"
+        "minikubeIp": "192.168.64.44"
       },
       "dataPropertyOrder": {
         "&": [
@@ -192,7 +222,7 @@
       },
       "isPrivate": false,
       "metaSortKey": 1587627476932,
-      "modified": 1590046224229,
+      "modified": 1590144960581,
       "name": "Base Environment",
       "parentId": "wrk_8a519d18cbf6468cbf5c5a44dd8d7c12",
       "_type": "environment"

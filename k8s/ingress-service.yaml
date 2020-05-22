@@ -1,7 +1,7 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: ingress-service
+  name: ingress-service-main
   annotations:
     kubernetes.io/ingress.class: nginx
 spec:
@@ -24,8 +24,21 @@ spec:
             backend:
               serviceName: my-elasticsearch-client
               servicePort: 9200
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-service-search-service
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+    -
+      http:
+        paths:
           -
-            path: /
+            path: /search(/|$)(.*)
             backend:
-              serviceName: my-kafka-cp-control-center
-              servicePort: 9021
+              serviceName: my-elasticsearch-client
+              servicePort: 9200
