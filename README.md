@@ -65,6 +65,7 @@ kubectl apply -f k8s-kafka/kafka-client.yaml
 ```shell script
 ./kafka-helpers/upload-source-folders.sh
 ./kafka-helpers/upload-sink-folders-db-graphs.sh
+./kafka-helpers/upload-sink-folders-es.sh
 ```
 
 ### Navigate to (there is insomnia config also)
