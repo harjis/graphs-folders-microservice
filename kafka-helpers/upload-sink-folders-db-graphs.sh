@@ -1,5 +1,5 @@
 kubectl exec -it kafka-client -- curl -X POST http://my-kafka-cp-kafka-connect:8083/connectors -H "Content-Type: application/json" -d '{
-  "name": "sink-folders-graphs",
+  "name": "sink-folders-db-graphs",
   "config": {
     "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
     "tasks.max": "1",

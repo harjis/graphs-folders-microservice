@@ -20,6 +20,11 @@ spec:
               serviceName: folders-cluster-ip-service
               servicePort: 5001
           -
+            path: /search
+            backend:
+              serviceName: my-elasticsearch-client
+              servicePort: 9200
+          -
             path: /
             backend:
               serviceName: my-kafka-cp-control-center

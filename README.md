@@ -14,17 +14,35 @@ minikube addons enable ingress
 
 1.6. Build custom debezium connect JDBC image
 ```shell script
-docker build -t d0rka/debezium-connect-jdbc:1.1 ./debezium-jdbc
-docker push d0rka/debezium-connect-jdbc:1.1
+docker build -t d0rka/debezium-connect-jdbc:1.2 ./debezium-jdbc
+docker push d0rka/debezium-connect-jdbc:1.2
 ```
 
 2. Init kafka. Sometimes this takes quite long (~5min)
 ```shell script
 helm install my-kafka confluent/cp-helm-charts -f k8s-kafka/values.yaml
 ```
+Can be updated with
+```shell script
+helm upgrade my-kafka confluent/cp-helm-charts -f k8s-kafka/values.yaml
+```
 Can be uninstalled with
 ```shell script
 helm uninstall my-kafka
+```
+
+2.5 Init elastic search
+```shell script
+helm install my-elasticsearch stable/elasticsearch -f k8s-elasticsearch/values.yaml
+```
+Can be updated with
+```shell script
+helm upgrade my-elasticsearch stable/elasticsearch -f k8s-elasticsearch/values.yaml
+```
+Can be uninstalled with
+```shell script
+helm uninstall my-elasticsearch
+kubectl delete pvc -l release=my-elasticsearch,component=data
 ```
 
 3. Start dev
@@ -45,8 +63,8 @@ kubectl apply -f k8s-kafka/kafka-client.yaml
 
 5. Upload sources and sinks
 ```shell script
-./kafka-helpers/upload-folders-source.sh
-./kafka-helpers/upload-folders-sink-graphs.sh
+./kafka-helpers/upload-source-folders.sh
+./kafka-helpers/upload-sink-folders-db-graphs.sh
 ```
 
 ### Navigate to (there is insomnia config also)
