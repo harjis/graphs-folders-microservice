@@ -11,7 +11,7 @@ kubectl exec -it kafka-client -- curl -X POST http://my-kafka-cp-kafka-connect:8
     "transforms": "unwrap",
     "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
     "transforms.unwrap.drop.tombstones": "false",
-    "auto.create": "true",
+    "auto.create": "false",
     "insert.mode": "upsert",
     "delete.enabled": "true",
     "pk.fields": "id",
