@@ -112,13 +112,13 @@ kafka-topics --zookeeper my-kafka-cp-zookeeper-headless:2181 --list
 Delete topic:
 ```shell script
 ./kafka-helpers/ssh.sh
-kafka-topics --zookeeper my-kafka-cp-zookeeper-headless:2181 --delete --topic t_folders
+kafka-topics --zookeeper my-kafka-cp-zookeeper-headless:2181 --delete --topic folders
 ```
 
 Consume topic:
 ```shell script
 ./kafka-helpers/ssh.sh
-kafka-console-consumer --bootstrap-server my-kafka-cp-kafka-headless:9092 --topic t_folders --from-beginning
+kafka-console-consumer --bootstrap-server my-kafka-cp-kafka-headless:9092 --topic folders --from-beginning
 ```
 
 # TODOS:
