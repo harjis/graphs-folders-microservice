@@ -1,3 +1,7 @@
+# High-level cluster diagram
+
+![alt text](./Highlevel-diag.png "Logo Title Text 1")
+
 # How to start
 
 ## Skaffold
