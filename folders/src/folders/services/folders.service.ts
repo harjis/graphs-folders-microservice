@@ -24,7 +24,6 @@ export class FoldersService {
   }
 
   async delete(folderId: number) {
-    // TODO this doesnt get emitted correctly
     return this.folderRepository.delete(folderId);
   }
 }
