@@ -67,7 +67,7 @@ skaffold dev
 
 4.5. Start kafka-client
 ```shell script
-kubectl apply -f k8s-kafka/kafka-client.yaml
+./kafka-helpers/client.sh
 ```
 
 5. Upload sources and sinks
