@@ -16,7 +16,7 @@ minikube addons enable ingress
 ./db-helpers/pvc-apply.sh
 ```
 
-1.6. Build custom debezium connect JDBC image
+1.6. (Don't do this) Build custom debezium connect JDBC image.
 ```shell script
 docker build -t d0rka/debezium-connect-jdbc:1.2 ./debezium-jdbc
 docker push d0rka/debezium-connect-jdbc:1.2
