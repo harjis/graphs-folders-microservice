@@ -115,3 +115,9 @@ Consume topic:
 ./kafka-helpers/ssh.sh
 kafka-console-consumer --bootstrap-server my-kafka-cp-kafka-headless:9092 --topic t_folders --from-beginning
 ```
+
+# Things to do:
+- What happens on transactional db modifications when the transaction fails and is rolled back?
+- What happens if message broker goes offline and local db stays online?
+- How long do topics need to be persisted?
+- How many times are the events being sent and how many times are they received?
