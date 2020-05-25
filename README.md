@@ -4,6 +4,11 @@
 
 # How to start
 
+Make sure minikube has enough resources:
+```shell script
+minikube start --cpus 4 --memory 15000 --disk-size 40000mb
+```
+
 ## Skaffold
 1. Create postgress secret and enable ingress
 ```shell script
