@@ -42,3 +42,8 @@ spec:
             backend:
               serviceName: my-elasticsearch-client
               servicePort: 9200
+          -
+            path: /connectors(/|$)(.*)
+            backend:
+              serviceName: my-kafka-cp-kafka-connect
+              servicePort: 8083
