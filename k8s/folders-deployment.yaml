@@ -22,7 +22,7 @@ spec:
           env:
             -
               name: POSTGRES_HOST
-              value: postgres-cluster-ip-service
+              value: folders-postgres-cluster-ip-service
             -
               name: POSTGRES_PORT
               value: '5432'

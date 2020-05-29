@@ -7,8 +7,6 @@ import {
 
 export class CreateFolders1590398610488 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<any> {
-      // drop the table created by jdbc sink
-    await queryRunner.dropTable('folders', true);
     await queryRunner.createTable(
       new Table({
         name: 'folders',
@@ -47,7 +45,7 @@ export class CreateFolders1590398610488 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<any> {
-    await queryRunner.dropTable('folders');
     await queryRunner.dropForeignKey('graphs', 'folderId');
+    await queryRunner.dropTable('folders');
   }
 }

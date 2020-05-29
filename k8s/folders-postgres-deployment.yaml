@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres-deployment
+  name: folders-postgres-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      component: postgres
+      component: folders-postgres
   template:
     metadata:
       labels:
-        component: postgres
+        component: folders-postgres
     spec:
       volumes:
         -
           name: postgres-storage
           persistentVolumeClaim:
-            claimName: database-persistent-volume-claim
+            claimName: folders-pvc
       containers:
         -
           name: postgres

@@ -57,3 +57,8 @@ spec:
             backend:
               serviceName: my-kafka-cp-schema-registry
               servicePort: 8081
+          -
+            path: /ksql(/|$)(.*)
+            backend:
+              serviceName: my-kafka-cp-ksql-server
+              servicePort: 8088
