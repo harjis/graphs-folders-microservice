@@ -13,9 +13,10 @@ import java.util.*
 
 class App {
     fun processFolders() {
+        println("Processing folders:")
         try {
             val consumer: KafkaConsumer<String, Folder> = KafkaConsumer(getProperties())
-            consumer.subscribe(Collections.singletonList("FOLDERS"))
+            consumer.subscribe(Collections.singletonList("folders"))
 
             while (true) {
                 val records = consumer.poll(Duration.ofMillis(100))
@@ -23,6 +24,10 @@ class App {
                     println(record.value())
                 }
             }
+        } catch (ex: Exception) {
+            println("Error!")
+            println(ex)
+            throw ex
         } finally {
             println("Finally do nothing")
         }
@@ -34,7 +39,7 @@ class App {
         properties[ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG] = System.getenv("KAFKA_HOST")
         properties[ConsumerConfig.AUTO_OFFSET_RESET_CONFIG] = "earliest"
         properties[AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG] = "http://my-kafka-cp-schema-registry:8081"
-        properties[ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG] = StringDeserializer::class.java
+        properties[ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG] = KafkaAvroDeserializer::class.java
         properties[ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG] = KafkaAvroDeserializer::class.java
 
         return properties
@@ -42,5 +47,6 @@ class App {
 }
 
 fun main(args: Array<String>) {
-    println(App().processFolders())
+    println("Ummm")
+//    App().processFolders()
 }
