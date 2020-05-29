@@ -7,7 +7,7 @@
     "database.port": "5432",
     "database.user": "postgres",
     "database.password": "my_pgpassword",
-    "database.dbname": "graphs-folders-microservice/graphs",
+    "database.dbname": "graphs-db",
     "database.server.name": "graphs",
     "table.whitelist": "public.graphs",
     "database.history.kafka.bootstrap.servers": "my-kafka-cp-kafka-headless:9092",

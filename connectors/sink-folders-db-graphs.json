@@ -4,7 +4,7 @@
     "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
     "tasks.max": "1",
     "topics": "folders",
-    "connection.url": "jdbc:postgresql://graphs-postgres-cluster-ip-service:5432/graphs-folders-microservice/graphs",
+    "connection.url": "jdbc:postgresql://graphs-postgres-cluster-ip-service:5432/graphs-db",
     "connection.user": "postgres",
     "connection.password": "my_pgpassword",
     "dialect.name": "PostgreSqlDatabaseDialect",
