@@ -126,13 +126,18 @@ cp-kafka-connect:
   #  requests:
   #   cpu: 100m
   #   memory: 128Mi
+  configurationOverrides:
+    key.converter.schemas.enable: true
+    key.converter: io.confluent.connect.avro.AvroConverter
+    key.converter.schema.registry.url: http://my-kafka-cp-schema-registry:8081
+    value.converter.schemas.enable: true
+    value.converter: io.confluent.connect.avro.AvroConverter
+    value.converter.schema.registry.url: http://my-kafka-cp-schema-registry:8081
   customEnv:
     CONNECT_PLUGIN_PATH: /usr/share/java,/usr/share/confluent-hub-components,/kafka/connect,/kafka/libs
     CONFIG_STORAGE_TOPIC: my_connect_configs
     OFFSET_STORAGE_TOPIC: my_connect_offsets
     STATUS_STORAGE_TOPIC: my_source_connect_statuses
-    CONNECT_KEY_CONVERTER_SCHEMAS_ENABLE: true
-    CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE: true
 
 ## ------------------------------------------------------
 ## KSQL Server

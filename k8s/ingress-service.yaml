@@ -24,6 +24,11 @@ spec:
             backend:
               serviceName: my-elasticsearch-client
               servicePort: 9200
+          -
+            path: /
+            backend:
+              serviceName: my-kafka-cp-control-center
+              servicePort: 9021
 ---
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
@@ -47,3 +52,8 @@ spec:
             backend:
               serviceName: my-kafka-cp-kafka-connect
               servicePort: 8083
+          -
+            path: /sr(/|$)(.*)
+            backend:
+              serviceName: my-kafka-cp-schema-registry
+              servicePort: 8081
