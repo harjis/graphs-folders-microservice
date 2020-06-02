@@ -24,9 +24,6 @@ spec:
               name: MODE
               value: 'development'
             -
-              name: PORT
-              value: '5600'
-            -
               name: KSQL_SERVER_HOST
               value: my-kafka-cp-ksql-server
             -

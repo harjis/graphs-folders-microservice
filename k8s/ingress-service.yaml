@@ -20,11 +20,6 @@ spec:
               serviceName: folders-cluster-ip-service
               servicePort: 5001
           -
-            path: /ksql
-            backend:
-              serviceName: ksql-queries-cluster-ip-service
-              servicePort: 5600
-          -
             path: /
             backend:
               serviceName: my-kafka-cp-control-center
@@ -57,6 +52,11 @@ spec:
             backend:
               serviceName: my-kafka-cp-schema-registry
               servicePort: 8081
+          -
+            path: /ksql(/|$)(.*)
+            backend:
+              serviceName: ksql-queries-cluster-ip-service
+              servicePort: 5600
           -
             path: /ssshh(/|$)(.*)
             backend:
