@@ -23,7 +23,7 @@ spec:
             path: /ksql
             backend:
               serviceName: ksql-queries-cluster-ip-service
-              servicePort: 6001
+              servicePort: 5600
           -
             path: /
             backend:
@@ -58,7 +58,7 @@ spec:
               serviceName: my-kafka-cp-schema-registry
               servicePort: 8081
           -
-            path: /ks(/|$)(.*)
+            path: /ssshh(/|$)(.*)
             backend:
               serviceName: my-kafka-cp-ksql-server
               servicePort: 8088

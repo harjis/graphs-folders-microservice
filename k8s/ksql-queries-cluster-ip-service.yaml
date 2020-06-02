@@ -8,6 +8,6 @@ spec:
     component: ksql-queries-server
   ports:
     -
-      name: web-server
-      port: 6001
-      targetPort: 6001
+      name: ksql-web-server
+      port: 5600
+      targetPort: 5600
