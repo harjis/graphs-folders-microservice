@@ -22,3 +22,13 @@ build:
           -
             src: 'src/*'
             dest: .
+    -
+      image: d0rka/graphs-folders-microservice_ksql-queries
+      context: ksql-queries
+      docker:
+        dockerfile: Dockerfile.dev
+      sync:
+        manual:
+          -
+            src: 'src/*'
+            dest: .

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ksql-queries-cluster-ip-service
+spec:
+  type: ClusterIP
+  selector:
+    component: ksql-queries-server
+  ports:
+    -
+      name: web-server
+      port: 6001
+      targetPort: 6001

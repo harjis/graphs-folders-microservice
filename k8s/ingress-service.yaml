@@ -20,10 +20,10 @@ spec:
               serviceName: folders-cluster-ip-service
               servicePort: 5001
           -
-            path: /search
+            path: /ksql
             backend:
-              serviceName: my-elasticsearch-client
-              servicePort: 9200
+              serviceName: ksql-queries-cluster-ip-service
+              servicePort: 6001
           -
             path: /
             backend:
@@ -58,7 +58,7 @@ spec:
               serviceName: my-kafka-cp-schema-registry
               servicePort: 8081
           -
-            path: /ksql(/|$)(.*)
+            path: /ks(/|$)(.*)
             backend:
               serviceName: my-kafka-cp-ksql-server
               servicePort: 8088
