@@ -11,7 +11,21 @@ export const graphById = async (graphId: number) => {
       'ksql.streams.auto.offset.reset': 'earliest'
     }
   };
+  return execute(payload);
+};
 
+export const mostPopularFolders = async () => {
+  const payload = {
+    ksql: 'SELECT * FROM most_popular_folders EMIT CHANGES LIMIT 2;',
+    streamsProperties: {
+      'ksql.streams.auto.offset.reset': 'earliest'
+    }
+  };
+
+  return execute(payload);
+};
+
+const execute = async (payload: Record<string, Object | string>) => {
   try {
     const response = await got.post(queryUrl, {
       json: payload,
