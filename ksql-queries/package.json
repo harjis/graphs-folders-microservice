@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "start": "nodemon --exec 'ts-node' src/index.ts -e ts",
     "ts": "tsc --pretty --noEmit"
   },
   "author": "",
@@ -15,7 +15,7 @@
     "@typescript-eslint/eslint-plugin": "^2.21.0",
     "@typescript-eslint/parser": "^2.21.0",
     "errorhandler": "^1.5.1",
-    "nodemon": "^2.0.2",
+    "nodemon": "^2.0.4",
     "ts-node": "^8.6.2",
     "typescript": "^3.8.2"
   },
