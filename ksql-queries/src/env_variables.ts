@@ -1,5 +1,4 @@
 type EnvironmentVariables = {
-  mode: 'production' | 'development' | 'test';
   port: number;
   ksqlServerHost: string;
   ksqlServerPort: string;
@@ -7,20 +6,18 @@ type EnvironmentVariables = {
 type CliEnvValue = string | undefined;
 type EnvWithErrors = { value: string | number; errors: string[] };
 type EnvironmentVariablesWithErrors = {
-  mode: EnvWithErrors;
   port: EnvWithErrors;
   ksqlServerHost: EnvWithErrors;
   ksqlServerPort: EnvWithErrors;
 };
 
 const environmentVariablesWithErrors: EnvironmentVariablesWithErrors = {
-  mode: validateMode(process.env.MODE),
   port: numberGrtZero(
     'port',
     process.env.KSQL_QUERIES_CLUSTER_IP_SERVICE_SERVICE_PORT
   ),
-  ksqlServerHost: nonEmptyString('ksqlServerUrl', process.env.KSQL_SERVER_HOST),
-  ksqlServerPort: numberGrtZero('ksqlServerPort', process.env.KSQL_SERVER_PORT)
+  ksqlServerHost: nonEmptyString('ksqlServerUrl', process.env.MY_KAFKA_CP_KSQL_SERVER_PORT_8088_TCP_ADDR),
+  ksqlServerPort: numberGrtZero('ksqlServerPort', process.env.MY_KAFKA_CP_KSQL_SERVER_PORT_8088_TCP_PORT)
 };
 
 const nestedErrors = Object.values(environmentVariablesWithErrors).map(
@@ -30,17 +27,6 @@ const nestedErrors = Object.values(environmentVariablesWithErrors).map(
 const flattenedArray = ([] as string[]).concat(...nestedErrors);
 if (flattenedArray.length > 0) {
   throw new Error(`Invalid env variables: ${flattenedArray.join(', ')}`);
-}
-
-function validateMode(value: CliEnvValue): EnvWithErrors {
-  if (value === 'production' || value === 'development' || value === 'test') {
-    return { value, errors: [] };
-  } else {
-    return {
-      value: '',
-      errors: ['mode: should be production, development or test']
-    };
-  }
 }
 
 function nonEmptyString(key: string, value: CliEnvValue): EnvWithErrors {

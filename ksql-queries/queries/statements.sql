@@ -32,14 +32,13 @@ CREATE STREAM graphs WITH (
 CREATE STREAM graphs_stream WITH (
     kafka_topic = 'graphs_stream',
     value_format = 'avro'
-)
-AS
-SELECT after->id as id,
-after->name as name,
-after->folderId as folderId
-FROM graphs
-PARTITION BY after->id
-EMIT CHANGES;
+) AS
+    SELECT after->id as id,
+    after->name as name,
+    after->folderId as folderId
+    FROM graphs
+    PARTITION BY after->id
+    EMIT CHANGES;
 
 CREATE STREAM graphs_by_folderid as select * from graphs_stream PARTITION BY folderId;
 
@@ -47,6 +46,14 @@ CREATE TABLE graphs_tbl WITH (
     kafka_topic = 'GRAPHS_BY_FOLDERID',
     value_format = 'avro'
 );
+
+CREATE TABLE graphs_mv AS
+ SELECT id,
+ LATEST_BY_OFFSET(name) AS name,
+ LATEST_BY_OFFSET(folderId) as folderId
+ FROM graphs_stream
+ GROUP BY id
+ EMIT CHANGES;
 
 -- GRAPHS
 
