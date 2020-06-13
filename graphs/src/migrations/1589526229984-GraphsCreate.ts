@@ -1,9 +1,4 @@
-import {
-  MigrationInterface,
-  QueryRunner,
-  Table,
-  TableColumn,
-} from 'typeorm';
+import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export class GraphsFoldersCreate1589526229984 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<any> {
@@ -16,7 +11,6 @@ export class GraphsFoldersCreate1589526229984 implements MigrationInterface {
             type: 'int',
             isPrimary: true,
             isGenerated: true,
-            generationStrategy: 'increment',
           },
           { name: 'name', type: 'varchar' },
           {
@@ -32,14 +26,6 @@ export class GraphsFoldersCreate1589526229984 implements MigrationInterface {
             default: 'now()',
           },
         ],
-      }),
-    );
-
-    await queryRunner.addColumn(
-      'graphs',
-      new TableColumn({
-        name: 'folderId',
-        type: 'int',
       }),
     );
   }

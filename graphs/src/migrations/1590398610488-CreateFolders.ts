@@ -1,7 +1,7 @@
 import {
   MigrationInterface,
   QueryRunner,
-  Table,
+  Table, TableColumn,
   TableForeignKey,
 } from 'typeorm';
 
@@ -13,7 +13,7 @@ export class CreateFolders1590398610488 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'int',
+            type: 'bigint',
             isPrimary: true,
             isGenerated: false
           },
@@ -29,6 +29,14 @@ export class CreateFolders1590398610488 implements MigrationInterface {
             isNullable: false,
           },
         ],
+      }),
+    );
+
+    await queryRunner.addColumn(
+      'graphs',
+      new TableColumn({
+        name: 'folderId',
+        type: 'bigint',
       }),
     );
 
