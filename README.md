@@ -72,9 +72,7 @@ skaffold dev
 
 5. Upload sources and sinks
 ```shell script
-./kafka-helpers/upload-source-folders.sh
-./kafka-helpers/upload-sink-folders-db-graphs.sh
-./kafka-helpers/upload-sink-folders-es.sh
+./kafka-helpers/upload-all.sh
 ```
 
 ### Navigate to (there is insomnia config also)
