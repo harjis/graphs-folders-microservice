@@ -6,11 +6,18 @@ export class CreateOutbox1592902285520 implements MigrationInterface {
       new Table({
         name: 'outbox',
         columns: [
-          { name: 'id', type: 'uuid', isPrimary: true, isGenerated: false },
-          { name: 'aggregatetype', type: 'varchar' },
-          { name: 'aggregateid', type: 'varchar' },
-          { name: 'type', type: 'varchar' },
-          { name: 'payload', type: 'jsonb' },
+          {
+            name: 'id',
+            type: 'uuid',
+            isPrimary: true,
+            isGenerated: false,
+            isUnique: true,
+            isNullable: false,
+          },
+          { name: 'aggregatetype', type: 'varchar', isNullable: false },
+          { name: 'aggregateid', type: 'varchar', isNullable: false },
+          { name: 'type', type: 'varchar', isNullable: false },
+          { name: 'payload', type: 'jsonb', isNullable: false },
         ],
       }),
     );

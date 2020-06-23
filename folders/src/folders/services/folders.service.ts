@@ -2,10 +2,15 @@ import { Connection, QueryRunner } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 
 import { Folder } from '../entities/folder.entity';
+import { OutboxService } from '../../outbox/services/outbox.service';
+import { FolderCreatedEvent } from "../events/folder-created.event";
 
 @Injectable()
 export class FoldersService {
-  constructor(private readonly connection: Connection) {}
+  constructor(
+    private readonly connection: Connection,
+    private readonly outboxService: OutboxService<Folder>,
+  ) {}
 
   all(): Promise<Folder[]> {
     const folderRepository = this.connection.getRepository(Folder);
@@ -19,7 +24,9 @@ export class FoldersService {
 
   async create(folder: Folder) {
     const createCallback = async (queryRunner: QueryRunner) => {
-      return await queryRunner.manager.save(this.toFolder(folder));
+      const savedFolder = await queryRunner.manager.save(this.toFolder(folder));
+      await this.outboxService.fireEvent(new FolderCreatedEvent(savedFolder), queryRunner);
+      return savedFolder;
     };
     return this.withTransaction(createCallback);
   }

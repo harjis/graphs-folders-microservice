@@ -22,12 +22,12 @@ export class FoldersController {
   }
 
   @Post()
-  create(@Body() folder: Folder) {
+  create(@Body() folder: Folder): Promise<Folder> {
     return this.foldersService.create(folder);
   }
 
   @Put()
-  update(@Body() folder: Folder) {
+  update(@Body() folder: Folder): Promise<Folder> {
     return this.foldersService.update(folder);
   }
 
