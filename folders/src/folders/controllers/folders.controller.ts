@@ -23,12 +23,12 @@ export class FoldersController {
 
   @Post()
   create(@Body() folder: Folder) {
-    return this.foldersService.upsert(folder);
+    return this.foldersService.create(folder);
   }
 
   @Put()
   update(@Body() folder: Folder) {
-    return this.foldersService.upsert(folder);
+    return this.foldersService.update(folder);
   }
 
   @Delete(':folderId')
