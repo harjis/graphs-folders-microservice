@@ -1,4 +1,12 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+
+import { Folder } from './folder.entity';
 
 @Entity('graphs')
 export class Graph {
@@ -8,6 +16,12 @@ export class Graph {
   @Column()
   name!: string;
 
-  @Column()
+  @Column({ type: 'int', nullable: false })
   folderId!: number;
+  @ManyToOne(
+    type => Folder,
+    folder => folder.graphs,
+  )
+  @JoinColumn({ name: 'folderId' })
+  folder!: Folder;
 }

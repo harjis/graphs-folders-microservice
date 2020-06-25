@@ -44,3 +44,18 @@ skaffold dev
 
 <minikube-ip>/folders
 <minikube-ip>/graphs
+
+#Memos
+
+The reason why Dockerfiles use yarn is that I experienced some really weird behaviour with npm. When I added
+class-validator and class-transformer to package.json and ran docker-compose up npm install did not install
+these. When sh to the container you could see that package.json is correct but ls node_modules | grep class
+showed that the packages are not there.
+
+Trouble with skaffold: At some point skaffold dev simply did not stabilize the deployments. All stayed at Pending
+state. I was not able to figure out the exact reason for this but it might be related to missing space. At 
+that time I also started to get a lot of `no space left on device` errors. I pruned everything and skaffold started
+working
+`docker system prune`
+
+`docker volume prune`

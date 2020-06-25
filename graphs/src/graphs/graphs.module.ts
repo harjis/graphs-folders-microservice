@@ -6,19 +6,22 @@ import envs from '../envs';
 import { Graph } from './entities/graph.entity';
 import { GraphsController } from './controllers/graphs.controller';
 import { GraphService } from './services/graph.service';
+import { FolderService } from './services/folder.service';
+import { Folder } from './entities/folder.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Graph]),
+    TypeOrmModule.forFeature([Folder]),
     ClientsModule.register([
       {
-        name: 'FOLDERS_SERVICE',
+        name: 'NATS_SERVICE',
         transport: Transport.NATS,
         options: { url: `nats://${envs.natsHost}:${envs.natsPort}` },
       },
     ]),
   ],
   controllers: [GraphsController],
-  providers: [GraphService],
+  providers: [GraphService, FolderService],
 })
 export class GraphsModule {}
