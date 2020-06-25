@@ -3,24 +3,30 @@ import {
   CreateDateColumn,
   Entity,
   OneToMany,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Graph } from './graph.entity';
 
 @Entity('t_folders')
 export class Folder {
-  @PrimaryGeneratedColumn()
-  id!: number;
+  constructor(id: number, name: string, createdAt: Date, updatedAt: Date) {
+    this.id = id;
+    this.name = name;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
+  }
+  @PrimaryColumn()
+  id: number;
 
   @Column()
-  name!: string;
+  name: string;
 
   @CreateDateColumn({ type: 'timestamp' })
-  createdAt!: Date;
+  createdAt: Date;
 
   @UpdateDateColumn({ type: 'timestamp' })
-  updatedAt!: Date;
+  updatedAt: Date;
 
   @OneToMany(
     type => Graph,
