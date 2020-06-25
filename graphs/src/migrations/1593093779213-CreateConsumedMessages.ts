@@ -8,8 +8,9 @@ export class CreateConsumedMessages1593093779213 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'string',
+            type: 'varchar',
             isPrimary: true,
+            isUnique: true,
             isGenerated: false,
           },
           { name: 'timeOfReceiving', type: 'bigint', isNullable: false },
