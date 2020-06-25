@@ -31,17 +31,24 @@ export class FoldersService {
       console.log(
         `Message with id ${messageId}has already been consumed. Skipping`,
       );
+      return;
     }
 
     if (eventType === 'FolderCreated') {
       this.create(message.value);
     }
+
+    await this.messageLogService.create(messageId.toString())
   }
 
-  private create(folderValue: Buffer) {
-    console.log('CREATING FOLDER', folderValue);
-    // const id = folderValue.id;
-    // const folder = new Folder(id)
-    // return this.repositry.save(graph);
+  private create(folderValue: Record<string, any>) {
+    const folderJson = JSON.parse(folderValue.payload);
+    const folder = new Folder(
+      folderJson.id,
+      folderJson.name,
+      folderJson.createdAt,
+      folderJson.updatedAt,
+    );
+    return this.repository.save(folder);
   }
 }

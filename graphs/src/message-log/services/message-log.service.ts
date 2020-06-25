@@ -10,11 +10,12 @@ export class MessageLogService {
     private readonly repository: Repository<ConsumedMessage>,
   ) {}
 
-  async create(message: ConsumedMessage) {
-    return this.repository.save(message);
+  async create(id: string) {
+    const consumedMessage = new ConsumedMessage(id, Date.now());
+    return this.repository.save(consumedMessage);
   }
 
   async hasBeenConsumed(id: string): Promise<boolean> {
-    return (await this.repository.findOne(id)) === undefined;
+    return (await this.repository.findOne(id)) !== undefined;
   }
 }

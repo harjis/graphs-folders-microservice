@@ -9,7 +9,7 @@ export class CreateFolders1590398610488 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<any> {
     await queryRunner.createTable(
       new Table({
-        name: 'folders',
+        name: 't_folders',
         columns: [
           {
             name: 'id',
@@ -20,13 +20,11 @@ export class CreateFolders1590398610488 implements MigrationInterface {
           { name: 'name', type: 'varchar' },
           {
             name: 'createdAt',
-            type: 'bigint',
-            isNullable: false,
+            type: 'varchar'
           },
           {
             name: 'updatedAt',
-            type: 'bigint',
-            isNullable: false,
+            type: 'varchar'
           },
         ],
       }),
@@ -46,7 +44,7 @@ export class CreateFolders1590398610488 implements MigrationInterface {
         name: 'graphs-folderId-fk',
         columnNames: ['folderId'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'folders',
+        referencedTableName: 't_folders',
         onDelete: 'CASCADE',
       }),
     );
@@ -54,6 +52,6 @@ export class CreateFolders1590398610488 implements MigrationInterface {
 
   public async down(queryRunner: QueryRunner): Promise<any> {
     await queryRunner.dropForeignKey('graphs', 'graphs-folderId-fk');
-    await queryRunner.dropTable('folders');
+    await queryRunner.dropTable('t_folders');
   }
 }

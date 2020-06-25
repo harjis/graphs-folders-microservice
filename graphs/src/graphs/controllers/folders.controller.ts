@@ -12,6 +12,6 @@ export class FoldersController {
   constructor(private folderService: FoldersService) {}
   @EventPattern('Folder.events')
   onFolderEvent(@Payload() message: KafkaMessage) {
-    this.folderService.processFolderEvent(message);
+    return this.folderService.processFolderEvent(message);
   }
 }
