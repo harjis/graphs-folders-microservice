@@ -3,7 +3,9 @@ import { Injectable } from '@nestjs/common';
 
 import { Folder } from '../entities/folder.entity';
 import { OutboxService } from '../../outbox/services/outbox.service';
-import { FolderCreatedEvent } from "../events/folder-created.event";
+import { FolderCreatedEvent } from '../events/folder-created.event';
+import { FolderUpdatedEvent } from '../events/folder-updated.event';
+import { FolderDeletedEvent } from '../events/folder-deleted.event';
 
 @Injectable()
 export class FoldersService {
@@ -25,7 +27,10 @@ export class FoldersService {
   async create(folder: Folder) {
     const createCallback = async (queryRunner: QueryRunner) => {
       const savedFolder = await queryRunner.manager.save(this.toFolder(folder));
-      await this.outboxService.fireEvent(new FolderCreatedEvent(savedFolder), queryRunner);
+      await this.outboxService.fireEvent(
+        new FolderCreatedEvent(savedFolder),
+        queryRunner,
+      );
       return savedFolder;
     };
     return this.withTransaction(createCallback);
@@ -33,18 +38,33 @@ export class FoldersService {
 
   async update(folder: Folder) {
     const updateCallBack = async (queryRunner: QueryRunner) => {
-      return await queryRunner.manager.save(this.toFolder(folder));
+      await queryRunner.manager.save(this.toFolder(folder));
+      const updatedFolder = await this.get(folder.id);
+      await this.outboxService.fireEvent(
+        new FolderUpdatedEvent(updatedFolder),
+        queryRunner,
+      );
+      return updatedFolder;
     };
     return this.withTransaction(updateCallBack);
   }
 
   async delete(folderId: number) {
-    const folderRepository = this.connection.getRepository(Folder);
-    return folderRepository.delete(folderId);
+    const deleteCallback = async (queryRunner: QueryRunner) => {
+      const folder = await this.get(folderId);
+      const result = await queryRunner.manager.remove(folder);
+      await this.outboxService.fireEvent(
+        // the spread is needed because remove mutates folder and removes id
+        new FolderDeletedEvent({ ...folder, id: folderId }),
+        queryRunner,
+      );
+      return result;
+    };
+    return this.withTransaction(deleteCallback);
   }
 
-  private async withTransaction(
-    callback: (queryRunner: QueryRunner) => Promise<Folder>,
+  private async withTransaction<ReturnType>(
+    callback: (queryRunner: QueryRunner) => Promise<ReturnType>,
   ) {
     const queryRunner = this.connection.createQueryRunner();
     await queryRunner.connect();

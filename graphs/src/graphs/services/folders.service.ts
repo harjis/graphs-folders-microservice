@@ -30,19 +30,38 @@ export class FoldersService {
 
     if (eventType === 'FolderCreated') {
       this.create(message.value);
+    } else if (eventType === 'FolderUpdated') {
+      this.update(message.value);
+    } else if (eventType === 'FolderDeleted') {
+      this.delete(message.value);
     }
 
     await this.messageLogService.create(messageId.toString());
   }
 
-  private create(folderValue: Record<string, any>) {
-    const folderJson = JSON.parse(folderValue.payload);
+  private create(folderObject: Record<string, any>) {
+    const folder = this.toFolder(folderObject);
+    return this.repository.save(folder);
+  }
+
+  private update(folderObject: Record<string, any>) {
+    const folder = this.toFolder(folderObject);
+    return this.repository.save(folder);
+  }
+
+  private delete(folderObject: Record<string, any>) {
+    const folder = this.toFolder(folderObject);
+    return this.repository.remove(folder);
+  }
+
+  private toFolder(folderObject: Record<string, any>): Folder {
+    const folderJson = JSON.parse(folderObject.payload);
     const folder = new Folder(
       folderJson.id,
       folderJson.name,
       folderJson.createdAt,
       folderJson.updatedAt,
     );
-    return this.repository.save(folder);
+    return folder;
   }
 }
