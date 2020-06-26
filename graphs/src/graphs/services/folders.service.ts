@@ -15,15 +15,9 @@ export class FoldersService {
   ) {}
 
   async processFolderEvent(message: KafkaMessage) {
-    const messageId = message.headers && message.headers.id;
-    const eventType = message.headers && message.headers.eventType;
-    if (messageId === undefined) {
-      throw Error('MessageId was undefined. Can not process message');
-    }
-
-    if (eventType === undefined) {
-      throw Error('EventType was undefined. Can not process message');
-    }
+    const { messageId, eventType } = this.messageLogService.parseMessage(
+      message,
+    );
     const hasBeenConsumed = await this.messageLogService.hasBeenConsumed(
       messageId.toString(),
     );
@@ -38,7 +32,7 @@ export class FoldersService {
       this.create(message.value);
     }
 
-    await this.messageLogService.create(messageId.toString())
+    await this.messageLogService.create(messageId.toString());
   }
 
   private create(folderValue: Record<string, any>) {
