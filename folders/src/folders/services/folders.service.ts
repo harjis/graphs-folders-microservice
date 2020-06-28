@@ -25,19 +25,18 @@ export class FoldersService {
   }
 
   async create(folder: Folder) {
-    const createCallback = async (queryRunner: QueryRunner) => {
+    return this.executeInTransaction(async (queryRunner: QueryRunner) => {
       const savedFolder = await queryRunner.manager.save(this.toFolder(folder));
       await this.outboxService.fireEvent(
         new FolderCreatedEvent(savedFolder),
         queryRunner,
       );
       return savedFolder;
-    };
-    return this.withTransaction(createCallback);
+    });
   }
 
   async update(folder: Folder) {
-    const updateCallBack = async (queryRunner: QueryRunner) => {
+    return this.executeInTransaction(async (queryRunner: QueryRunner) => {
       await queryRunner.manager.save(this.toFolder(folder));
       const updatedFolder = await this.get(folder.id);
       await this.outboxService.fireEvent(
@@ -45,12 +44,11 @@ export class FoldersService {
         queryRunner,
       );
       return updatedFolder;
-    };
-    return this.withTransaction(updateCallBack);
+    });
   }
 
   async delete(folderId: number) {
-    const deleteCallback = async (queryRunner: QueryRunner) => {
+    return this.executeInTransaction(async (queryRunner: QueryRunner) => {
       const folder = await this.get(folderId);
       const result = await queryRunner.manager.remove(folder);
       await this.outboxService.fireEvent(
@@ -59,11 +57,31 @@ export class FoldersService {
         queryRunner,
       );
       return result;
-    };
-    return this.withTransaction(deleteCallback);
+    });
   }
 
-  private async withTransaction<ReturnType>(
+  async fail() {
+    return this.executeInTransaction(async (queryRunner: QueryRunner) => {
+      const folder1 = new Folder();
+      folder1.name = 'Should not be sent because name not unique';
+      const savedFolder1 = await queryRunner.manager.save(folder1);
+      await this.outboxService.fireEvent(
+        new FolderCreatedEvent(savedFolder1),
+        queryRunner,
+      );
+
+      const folder2 = new Folder();
+      folder1.name = 'Should not be sent because name not unique';
+      const savedFolder2 = await queryRunner.manager.save(folder2);
+
+      await this.outboxService.fireEvent(
+        new FolderCreatedEvent(savedFolder2),
+        queryRunner,
+      );
+    });
+  }
+
+  private async executeInTransaction<ReturnType>(
     callback: (queryRunner: QueryRunner) => Promise<ReturnType>,
   ) {
     const queryRunner = this.connection.createQueryRunner();

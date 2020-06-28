@@ -21,6 +21,11 @@ export class FoldersController {
     return this.foldersService.all();
   }
 
+  @Get('/fail')
+  fail(): Promise<void> {
+    return this.foldersService.fail();
+  }
+
   @Post()
   create(@Body() folder: Folder): Promise<Folder> {
     return this.foldersService.create(folder);
