@@ -110,8 +110,8 @@ cp-kafka-rest:
 ## ------------------------------------------------------
 cp-kafka-connect:
   enabled: true
-  image: d0rka/debezium-connect-jdbc
-  imageTag: 1.2
+  image: debezium/connect
+  imageTag: 1.3
   ## Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace.
   ## https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod
   imagePullSecrets:

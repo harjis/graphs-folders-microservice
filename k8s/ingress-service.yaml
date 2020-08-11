@@ -38,11 +38,6 @@ spec:
       http:
         paths:
           -
-            path: /search(/|$)(.*)
-            backend:
-              serviceName: my-elasticsearch-client
-              servicePort: 9200
-          -
             path: /connectors(/|$)(.*)
             backend:
               serviceName: my-kafka-cp-kafka-connect

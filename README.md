@@ -20,14 +20,12 @@ minikube addons enable ingress
 ```shell script
 ./db-helpers/pvc-apply.sh
 ```
-
-1.6. (Don't do this) Build custom debezium connect JDBC image.
+2. Install kafka. Sometimes this takes quite long (~5min)
 ```shell script
-docker build -t d0rka/debezium-connect-jdbc:1.2 ./debezium-jdbc
-docker push d0rka/debezium-connect-jdbc:1.2
+./kafka-helpers/install.sh
 ```
 
-2. Init kafka. Sometimes this takes quite long (~5min)
+Alternative manual usage
 ```shell script
 helm install my-kafka confluent/cp-helm-charts -f k8s-kafka/values.yaml
 ```
@@ -38,20 +36,6 @@ helm upgrade my-kafka confluent/cp-helm-charts -f k8s-kafka/values.yaml
 Can be uninstalled with
 ```shell script
 helm uninstall my-kafka
-```
-
-2.5 Init elastic search
-```shell script
-helm install my-elasticsearch stable/elasticsearch -f k8s-elasticsearch/values.yaml
-```
-Can be updated with
-```shell script
-helm upgrade my-elasticsearch stable/elasticsearch -f k8s-elasticsearch/values.yaml
-```
-Can be uninstalled with
-```shell script
-helm uninstall my-elasticsearch
-kubectl delete pvc -l release=my-elasticsearch,component=data
 ```
 
 3. Start dev
@@ -81,6 +65,13 @@ skaffold dev
 <minikube-ip>/graphs
 
 #Memos
+
+You can reset kafka and others with
+```shell script
+ ./kafka-helpers/uninstall.sh
+ ./kafka-helpers/clear-all-pvcs.sh
+ ./kafka-helpers/install.sh
+```
 
 The reason why Dockerfiles use yarn is that I experienced some really weird behaviour with npm. When I added
 class-validator and class-transformer to package.json and ran docker-compose up npm install did not install
