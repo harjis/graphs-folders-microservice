@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: most-popular-folders-postgres-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: most-popular-folders-postgres
+  template:
+    metadata:
+      labels:
+        component: most-popular-folders-postgres
+    spec:
+      volumes:
+        -
+          name: postgres-storage
+          persistentVolumeClaim:
+            claimName: most-popular-folders-pvc
+      containers:
+        -
+          name: postgres
+          image: debezium/postgres:12
+          ports:
+            -
+              containerPort: 5432
+          volumeMounts:
+            -
+              name: postgres-storage
+              mountPath: /var/lib/postgresql/data
+              subPath: postgres
+          env:
+            -
+              name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pgpassword
+                  key: POSTGRES_PASSWORD

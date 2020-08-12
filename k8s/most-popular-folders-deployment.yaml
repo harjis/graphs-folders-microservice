@@ -21,5 +21,25 @@ spec:
               containerPort: 6001
           env:
             -
+              name: POSTGRES_HOST
+              value: most-popular-folders-postgres-cluster-ip-service
+            -
+              name: POSTGRES_PORT
+              value: '5432'
+            -
+              name: POSTGRES_USERNAME
+              value: postgres
+            -
+              name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pgpassword
+                  key: POSTGRES_PASSWORD
+            -
+              name: POSTGRES_DATABASE
+              value: most-popular-folders-db
+            -
               name: KAFKA_HOST
-              value: 'my-kafka-cp-kafka-headless:9092'
+              value: 'my-kafka-cp-kafka-headless'
+            - name: KAFKA_PORT
+              value: '9092'
