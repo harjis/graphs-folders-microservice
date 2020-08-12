@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: most-popular-folders-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: most-popular-folders-server
+  template:
+    metadata:
+      labels:
+        component: most-popular-folders-server
+    spec:
+      containers:
+        -
+          name: most-popular-folders-backend
+          image: d0rka/graphs-folders-microservice_most-popular-folders
+          ports:
+            -
+              containerPort: 6001
+          env:
+            -
+              name: KAFKA_HOST
+              value: 'my-kafka-cp-kafka-headless:9092'

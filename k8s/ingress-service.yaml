@@ -20,6 +20,11 @@ spec:
               serviceName: folders-cluster-ip-service
               servicePort: 5001
           -
+            path: /most_popular_folders
+            backend:
+              serviceName: most-popular-folders-cluster-ip-service
+              servicePort: 6001
+          -
             path: /
             backend:
               serviceName: my-kafka-cp-control-center

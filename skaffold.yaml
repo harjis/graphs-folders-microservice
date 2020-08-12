@@ -23,10 +23,15 @@ build:
             src: 'src/*'
             dest: .
     -
-      image: d0rka/graphs-folders-microservice_ksql-queries
-      context: ksql-queries
-      sync:
-        manual:
-          -
-            src: 'src/*'
-            dest: .
+      image: d0rka/graphs-folders-microservice_most-popular-folders
+      jib: {}
+      context: most-popular-folders
+      # Jib has problems with Dockerfile.dev so that's why it is just Dockerfile
+#    -
+#      image: d0rka/graphs-folders-microservice_ksql-queries
+#      context: ksql-queries
+#      sync:
+#        manual:
+#          -
+#            src: 'src/*'
+#            dest: .
