@@ -40,6 +40,4 @@ spec:
               value: most-popular-folders-db
             -
               name: KAFKA_HOST
-              value: 'my-kafka-cp-kafka-headless'
-            - name: KAFKA_PORT
-              value: '9092'
+              value: 'my-kafka-cp-kafka-headless:9092'
