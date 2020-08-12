@@ -2,7 +2,6 @@ package com.example.mostpopularfolders;
 
 import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.kstream.KStream;
-import org.apache.kafka.streams.kstream.Printed;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -19,16 +18,13 @@ public class MostPopularFoldersApplication {
     public static class MostPopularFoldersProcessor {
         @Bean
         public Function<KStream<String, String>, KStream<String, Folder>> process() {
-            return input -> {
-                System.out.println("HERE!");
-                input.print(Printed.toSysOut());
-                System.out.println("HERE22");
-                return input.map((key, value) -> {
-                    System.out.println("WHAT!");
-                    System.out.println(value);
-                    return new KeyValue<>(key, new Folder(1L, value));
-                });
-            };
+            return input ->
+                    input.map((key, value) -> {
+                        System.out.println("WHAT!!");
+                        System.out.println(key);
+                        System.out.println(value);
+                        return new KeyValue<>(key, new Folder(1L, value));
+                    });
         }
     }
 
