@@ -1,5 +1,7 @@
 package com.example.mostpopularfolders;
 
+import com.example.mostpopularfolders.app.serdes.SerdeFactory;
+import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.kstream.KStream;
 import org.springframework.boot.SpringApplication;
@@ -15,44 +17,27 @@ public class MostPopularFoldersApplication {
         SpringApplication.run(MostPopularFoldersApplication.class, args);
     }
 
+
     public static class MostPopularFoldersProcessor {
         @Bean
-        public Function<KStream<String, String>, KStream<String, Folder>> process() {
+        public Function<KStream<String, Graph>, KStream<String, Graph>> process() {
             return input ->
                     input.map((key, value) -> {
-                        return new KeyValue<>(key, new Folder(1L, value));
+                        System.out.println(value);
+                        return new KeyValue<>(key, value);
                     });
         }
     }
 
-    static class Folder {
-        private Long id;
-        private String name;
+    class Graph {
+        public Long id;
+        public String name;
+        public Long folderId;
+    }
 
-        public Folder() {
-
-        }
-
-        public Folder(Long id, String name) {
-            this.id = id;
-            this.name = name;
-        }
-
-        public Long getId() {
-            return id;
-        }
-
-        public void setId(Long id) {
-            this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
+    @Bean
+    public Serde<Graph> graphInSerde() {
+        return SerdeFactory.createDbzEventJsonPojoSerdeFor(Graph.class, false);
     }
 
 }
