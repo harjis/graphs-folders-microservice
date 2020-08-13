@@ -20,9 +20,6 @@ public class MostPopularFoldersApplication {
         public Function<KStream<String, String>, KStream<String, Folder>> process() {
             return input ->
                     input.map((key, value) -> {
-                        System.out.println("WHAT!!");
-                        System.out.println(key);
-                        System.out.println(value);
                         return new KeyValue<>(key, new Folder(1L, value));
                     });
         }

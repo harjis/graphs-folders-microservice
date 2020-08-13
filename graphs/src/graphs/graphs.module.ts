@@ -9,6 +9,7 @@ import { Graph } from './entities/graph.entity';
 import { GraphsController } from './controllers/graphs.controller';
 import { GraphService } from './services/graph.service';
 import { MessageLogService } from '../message-log/services/message-log.service';
+import { OutboxService } from '../outbox/services/outbox.service';
 
 @Module({
   imports: [
@@ -17,6 +18,6 @@ import { MessageLogService } from '../message-log/services/message-log.service';
     TypeOrmModule.forFeature([ConsumedMessage]),
   ],
   controllers: [GraphsController, FoldersController],
-  providers: [GraphService, FoldersService, MessageLogService],
+  providers: [GraphService, FoldersService, MessageLogService, OutboxService],
 })
 export class GraphsModule {}
