@@ -1,4 +1,4 @@
-package com.example.mostpopularfolders.app.events;
+package com.example.mostpopularfolders.app.streams.messages;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
