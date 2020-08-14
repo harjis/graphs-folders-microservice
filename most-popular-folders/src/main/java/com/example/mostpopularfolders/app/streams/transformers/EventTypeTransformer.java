@@ -26,6 +26,7 @@ public class EventTypeTransformer implements Transformer<String, Event, KeyValue
         Iterable<Header> hr = this.context.headers().headers("eventType");
         Optional<Header> eventTypeHeader = StreamSupport.stream(hr.spliterator(), false).findFirst();
 
+        // TODO eventTypeHeader can be null or it's content can be null so check for that and fail is so
         return new KeyValue<>(
                 key,
                 new EventWithEventType(value.payload, new String(eventTypeHeader.get().value()))
