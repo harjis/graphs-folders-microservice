@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nats-cluster-ip-service
+spec:
+  type: ClusterIP
+  selector:
+    component: nats
+  ports:
+    -
+      name: main-port
+      port: 4222
+      targetPort: 4222
+    -
+      name: some-port
+      port: 6222
+      targetPort: 6222
+    -
+      name: dunno-what-this-is
+      port: 8222
+      targetPort: 8222

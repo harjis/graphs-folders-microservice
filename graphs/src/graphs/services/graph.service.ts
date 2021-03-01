@@ -5,8 +5,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Observable, of } from 'rxjs';
 import { Repository } from 'typeorm';
 
-import { Graph } from '../entities/graph.entity';
 import { FolderDto } from '../../dtos/folder.dto';
+import { Graph } from '../entities/graph.entity';
 
 @Injectable()
 export class GraphService {
@@ -32,6 +32,6 @@ export class GraphService {
   }
 
   private getFolder(folderId: number): Observable<FolderDto> {
-    return this.client.send({ cmd: 'getFolder' }, folderId);
+    return this.client.send('getFolder', folderId);
   }
 }
